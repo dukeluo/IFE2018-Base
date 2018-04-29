@@ -20,7 +20,7 @@ HTML指的是超文本标记语言(Hyper Text Markup language)，是用来描述
 常见的块级标签`<h1>`-`<h6>`、`<p>`、`<ol>`、`<li>`、`<blockquote>`;常见的行内标签`<a>`、`<img>`、`<em>`、`<strong>`、`<abbr>`、`<cite>`、`<q>`。
 
 ### 表单标签都有哪些，对应着什么功能，都有哪些属性？
-`<form>`标签用来定义HTML表单，`action`属性规定向何处提交表单的地址，`method`规定在提交表单时所用的HTTP方法，`target`属性规定`action`属性中地址的目标，`accept-charset`规定在被提交表单中使用的字符集，`enctype`规定被提交数据的编码，`autocomplete`规定浏览器应该自动完成表单，‘novalidate’规定浏览器不验证表单;表单能够包含`input`元素。
+`<form>`标签用来定义HTML表单，`action`属性规定向何处提交表单的地址，`method`规定在提交表单时所用的HTTP方法，`target`属性规定`action`属性中地址的目标，`accept-charset`规定在被提交表单中使用的字符集，`enctype`规定被提交数据的编码，`autocomplete`规定浏览器应该自动完成表单，`novalidate`规定浏览器不验证表单;表单能够包含`input`元素。
 
 ### ol, ul, li, dl, dd, dt等这些标签都适合用在什么地方，举个例子？
 用来列表项，比如，展示牛逼闪闪的技能栈。
