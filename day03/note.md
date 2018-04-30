@@ -3,16 +3,16 @@
 CSS(Cascading Style Sheets)中文名字叫做层叠样式表，是一种用于向用户指定文档如何呈现的语言，有了它，HTML文档才有丰富的样式;在浏览器解释的过程中，HTML和CSS转化成DOM，然后浏览器向用户显示DOM的内容。
 
 ### CSS的基本语法是怎样的？
-CSS规则分两部分，选择符和声明，选择符用于指出规则所要选择的元素;声明又分两部分组成，属性和值，属性指出要影响元素哪方面的样式，值就是属性的一个新状态，声明包含在一对花括号内。
+CSS规则分两部分，选择符和声明。选择符用于指出规则所要选择的元素;声明又分两部分组成，属性和值，属性指出要影响元素哪方面的样式，值就是属性的一个新状态，声明包含在一对花括号内。
 
 ### CSS选择器是什么概念，简单选择器和属性选择器是什么？
 CSS选择符用于指出规则所要选择的元素，上下文选择符基于位置选择元素，以空格作为分隔符;类选择符用来选择文档中的类属性，类属性以`.`开头，后面紧接类名;ID选择符用来选择文档中的ID属性，类属性以`#`开头，后面紧接ID，注意ID在文档中是唯一的;这几种选择符可以组合使用。
 
 ### 文本样式都有哪些相关属性，对应哪些值？
-`text-indent`： 设定行内盒子相对于包含元素的起点
-`letter-spacing`： 设定字符间距
-`word-spacing`： 设定单词间距
-`text-decoration`： 设定文本装饰，常见值有`underline`、`overline`、`line-through`、`none`，最主要的作用用来控制链接的下划线。
-`text-align`： 控制文本和包含盒子对齐的方式，`left`左对齐文本，`right`右对齐文本，`center`居中文字，`justify`使文本展开，改变单词之间的差距，使所有文本行的宽度相同。
-`line-height`： 设定行高，行高平均分布在一行文本的上方和下方。
-`text-transform`：控制文本的大小写，常见值有`none`、`uppercase`、`lowercase`、`capitalize`。
+`text-indent`： 设定行内盒子相对于包含元素的起点  
+`letter-spacing`： 设定字符间距  
+`word-spacing`： 设定单词间距  
+`text-decoration`： 设定文本装饰，常见值有`underline`、`overline`、`line-through`、`none`，最主要的作用用来控制链接的下划线  
+`text-align`： 控制文本和包含盒子对齐的方式，`left`左对齐文本，`right`右对齐文本，`center`居中文字，`justify`使文本展开，改变单词之间的差距，使所有文本行的宽度相同  
+`line-height`： 设定行高，行高平均分布在一行文本的上方和下方  
+`text-transform`：控制文本的大小写，常见值有`none`、`uppercase`、`lowercase`、`capitalize`  
