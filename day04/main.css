@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  margin-bottom: 0.6rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+li {
+  font-size: 1.3rem;
+  list-style-type: none;
+}
+
+h2, h3, p, li {
+  line-height: 1.8rem;
+  margin-bottom: 0.4rem;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+}
+
+a:link {
+  color: inherit;
+}
+
+a:visited {
+  color: #437A16;
+}
+
+a:focus {
+  border-bottom: 1px solid;
+  background: #BAE498;
+}
+
+a:hover {
+  border-bottom: 1px solid;
+  background: #CDFEAA;
+}
+
+a:active {
+  background: #265301;
+  color: #CDFEAA;
+}
+
+.wrapper {
+  height: 100vh;
+  background-color: #bed742;
+  background-image: url(https://ws3.sinaimg.cn/large/6f8a2832gy1fqrnfj5nddj21hc0pik7z.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  padding-top: 20px;
+}
+
+.main-wrapper {
+  width: 60%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 20px 40px 30px;
+  background-color: #fffef9;
+}
+
+.logo h1 {
+  letter-spacing: 1px;
+  color: grey;
+}
+
+.logo h2 {
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+
+.logo p {
+  letter-spacing: 1px;
+  font-style: italic;
+}
+
+.project h3 {
+  letter-spacing: 1px;
+}
+
+.project p {
+  letter-spacing: 1px;
+}
