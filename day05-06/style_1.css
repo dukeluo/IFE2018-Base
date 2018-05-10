@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-size: 10px;
   font-family: Helvetica, Arial, sans-serif;
@@ -86,23 +90,21 @@ body {
 
 #main_wrapper {
   width: 960px;
-  box-sizing: border-box;
   margin: 0 auto;
-  padding: 20px 40px 30px;
+  padding: 20px 40px 0;
   background-color: #fffef9;
-}
-
-header {
-  margin-bottom: 30px;
 }
 
 section {
   margin-bottom: 24px;
 }
 
+#firstcolwrap section {
+  margin-bottom: 30px;
+}
+
 article {
-  margin: 10px 0;
-  padding: 8px 0;
+  margin: 18px 0;
 }
 
 .inner {

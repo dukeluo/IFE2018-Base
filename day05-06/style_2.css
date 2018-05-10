@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-size: 10px;
   font-family: Helvetica, Arial, sans-serif;
@@ -87,7 +91,7 @@ body {
 #main_wrapper {
   width: 960px;
   margin: 0 auto;
-  background-color: #426ab3;
+  background-color: #74A474;
 }
 
 #firstcolwrap {
@@ -128,7 +132,6 @@ body {
 
 #basic_information ul, #contact_information ul {
   float: left;
-  margin-left: 10px;
 }
 
 #basic_information li, #contact_information li {

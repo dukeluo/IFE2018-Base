@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-size: 10px;
   font-family: Helvetica, Arial, sans-serif;
@@ -97,20 +101,44 @@ body {
 }
 
 #secondcolwrap section {
-  display: table-row;
-  /* width: 960px; */
-  border: 2px solid red;
+  width: 960px;
+  border-bottom: 2px solid #a1a3a6;
 }
 
-#secondcolwrap h2, #secondcolwrap ul, #secondcolwrap article {
-  display: table-cell;
+#secondcolwrap section > * {
+  padding-top: 20px;
+  padding-left: 10px;
 }
 
 #secondcolwrap h2 {
+  float: left;
   width: 160px;
-  height: 80px;
+  height: 140px;
   text-align: center;
-  display: table-cell;
-  padding-top: 10px;
   background-color: #8a8c8e;
+  margin-bottom: 0;
+}
+
+#secondcolwrap ul {
+  float: left;
+  width: 800px;
+  background-color: #fffef9;
+}
+
+#basic_information li, #contact_information li {
+  float: left;
+  padding-right: 50px;
+}
+
+#secondcolwrap .skill_wrap, #secondcolwrap .education_wrap, #secondcolwrap .project_wrap {
+  float: left;
+  width: 800px;
+}
+
+.inner h3 {
+  float: left;
+}
+
+.inner p {
+  float: left;
 }

@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-size: 10px;
   font-family: Helvetica, Arial, sans-serif;
@@ -98,25 +102,39 @@ body {
 
 #secondcolwrap section {
   width: 960px;
-  height: 120px;
-  border-bottom: 2px solid #a1a3a6;
+  display: table-row;
 }
 
 #secondcolwrap h2 {
-  float: left;
   width: 160px;
-  padding-top: 20px;
+  height: 140px;
+  display: table-cell;
   text-align: center;
   background-color: #8a8c8e;
+  border-bottom: 2px solid #a1a3a6;
 }
 
-#secondcolwrap ul {
-  float: left;
+#secondcolwrap ul, #secondcolwrap .skill_wrap, #secondcolwrap .education_wrap, #secondcolwrap .project_wrap {
   width: 800px;
-  background-color: #fffef9;
+  height: 140px;
+  display: table-cell;
+  border-bottom: 2px solid #a1a3a6;
 }
 
-#secondcolwrap article {
+#secondcolwrap section > * {
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+#basic_information li, #contact_information li {
   float: left;
-  width: 400px;
+  padding-right: 50px;
+}
+
+.inner h3 {
+  float: left;
+}
+
+.inner p {
+  float: left;
 }
