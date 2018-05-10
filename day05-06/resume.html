@@ -6,8 +6,48 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style_1.css">
   <title>IFE Day05-06</title>
+  <style>
+    #resume_selector {
+      width: 600px;
+      height: 60px;
+      margin: 0 auto 20px;
+    }
+
+    #resume_selector li {
+      list-style: none;
+      float: left;
+      width: 200px;
+    }
+
+    #resume_selector button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      font-size: 16px;
+      width: 200px;
+    }
+
+    #resume_selector li + li button {
+      border-left: 2px solid #aaa;
+    }
+
+    #resume_selector button:hover {
+      background-color: #ef4136;
+    }
+  </style>
 </head>
 <body>
+  <div id="resume_selector">
+    <ul>
+      <li><button type="button">简历一</button></li>
+      <li><button type="button">简历二</button></li>
+      <li><button type="button">简历三</button></li>
+    </ul>
+  </div>
   <div id="main_wrapper" class="clearfix">
     <div id="firstcolwrap">
       <section>
@@ -85,4 +125,18 @@
     </div>
   </div>
 </body>
+<script>
+  cssLink = document.querySelector('link');
+  btns = document.querySelectorAll('button');
+  for(var i =0;i<btns.length;i++) {
+    addHandler(btns[i],i);
+  }
+
+  function addHandler(btn, i) {
+    var file_name="style_"+(i+1)+".css";
+    btn.addEventListener("click",function(event){
+      cssLink.href=file_name;
+    });
+  }
+</script>
 </html>
