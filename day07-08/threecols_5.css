@@ -1,0 +1,40 @@
+/* using float */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #d1c7b7;
+  padding-top: 20px;
+}
+
+#wrapper {
+  width: 60%;
+  min-width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: #fffef9;
+  overflow: auto;
+}
+
+#center {
+  float: left;
+  margin-left: 200px;
+  margin-right: 300px;
+  border: 2px dotted #777;
+}
+
+#left {
+  width: 200px;
+  float: left;
+  margin-left: -100%;
+  border: 2px solid #666;
+}
+
+#right {
+  width: 300px;
+  float: left;
+  margin-left: -300px;
+  border: 2px dashed #ccc;
+}
