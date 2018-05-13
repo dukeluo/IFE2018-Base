@@ -1,0 +1,41 @@
+/* using position */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #d1c7b7;
+  padding-top: 20px;
+}
+
+#wrapper {
+  width: 60%;
+  min-width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: #fffef9;
+  position: relative;
+  padding-left: 500px;
+}
+
+#center {
+  width: 300px;
+  position: absolute;
+  left: 200px;
+  top: 0;
+  border: 2px dotted #777;
+}
+
+#left {
+  width: 200px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 2px solid #666;
+}
+
+#right {
+  width: 100%;
+  border: 2px dashed #ccc;
+}
