@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+li {
+  font-size: 1.3rem;
+  list-style-type: none;
+}
+
+h2, h3, p, li {
+  line-height: 1.8rem;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+}
+
+a:link {
+  color: inherit;
+}
+
+a:hover {
+  border-bottom: 1px solid;
+}
+
+.inner {
+  width: 960px;
+  margin: 0 auto;
+  border: 2px solid #ccc;
+}
+
+header {
+  width: 100%;
+  height: 60px;
+  background-color: #333;
+}
+
+header .inner {
+  position: relative;
+  height: 60px;
+}
+
+header .logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  padding: 10px 0;
+  color: #fffffb;
+}
+
+header .ru_nav {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 4px 0;
+  color: #fffffb;
+}
+header .ru_nav li {
+  font-size: 1.0rem;
+  float: left;
+  margin-left: 20px;
+}
+
+header .ru_nav a {
+  color: #fffffb;
+}
+
+#banner {
+  width: 100%;
+  height: 300px;
+  background-color: #1d953f;
+}
+
+#banner .inner {
+  position: relative;
+  height: 300px;
+}
+
+#banner .caption {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  border: 2px solid red;
+}
+
+#banner .caption li {
+  display: inline-block;
+  float: left;
+  width: 30px;
+  height: 40px;
+  margin-left: 18px;
+  padding: 0 5px;
+  border: 1px solid #130c0e;
+  background-color: #d3d7d4;
+}
+
+#banner .caption li:hover {
+  bottom: 0;
+  height: 50px;
+}
+
+#banner .caption li a {
+  /* position: absolute; */
+  /* bottom: 4px; */
+  border-bottom: none;
+}
