@@ -154,7 +154,7 @@ header .ru_nav a {
 
 #main_nav .inner ul {
   position: absolute;
-  bottom: 0;
+  top: 10px;
   left: 0;
 }
 
@@ -166,13 +166,14 @@ header .ru_nav a {
   padding: 10px 10px;
   text-align: center;
   border: 1px solid #aaa;
+  border-bottom-width: 2px;
   border-radius: 20px 20px 0 0;
-  border-bottom: none;
   background-color: #ccc;
 }
 
 #main_nav .inner li:hover {
   background-color: transparent;
+  border-bottom: 2px solid rgba(255, 255, 255, 1);
 }
 
 #main_nav .inner a {
