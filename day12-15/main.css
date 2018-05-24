@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+h2, h3, p {
+  line-height: 1.8rem;
+}
+
+/* Style begins */
+#wrapper {
+  display: flex;
+  width: 100%;
+  min-width: 1500px;
+  background-color: #fffffb;
+}
+
+#app_col {
+  position: relative;
+  width: 100px;
+  background-color: #121a2a;
+}
+
+#app_col .apps {
+  position: fixed;
+  top: 20px;
+  left: 0;
+}
+
+#app_col .apps a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 20px;
+  margin-bottom: 20px;
+}
+
+#app_col .apps li:nth-child(1) a {
+  background-image: url(img/app1.png);
+}
+
+#app_col .apps li:nth-child(2) a {
+  background-image: url(img/app2.png);
+}
+
+#app_col .apps li:nth-child(3) a {
+  background-image: url(img/app3.png);
+}
+
+#app_col .apps li:nth-child(4) a {
+  background-image: url(img/app4.png);
+}
+
+#app_col .settings {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  height: 16px;
+}
+
+#app_col .settings li {
+  float: left;
+  width: 16px;
+  margin-right: 16px;
+}
+
+#app_col .settings a {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-image: url(img/grid.png);
+}
+
+#app_col .settings li:nth-child(2) a {
+  background-image: url(img/grid.png);
+  background-position: -32px 0;
+}
+
+#nav_col {
+}
+
+#feature_area {
+  /* display: flex; */
+}
