@@ -33,6 +33,14 @@ h2, h3, p {
   line-height: 1.8rem;
 }
 
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 /* Style begins */
 #wrapper {
   display: flex;
@@ -103,6 +111,167 @@ h2, h3, p {
 }
 
 #nav_col {
+  position: relative;
+  width: 260px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  background-color: #222c3c;
+  color: #fffffb;
+}
+
+#nav_col .nav_bar article {
+  margin: 0 20px;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #2a3547;
+  text-transform: capitalize;
+}
+
+#nav_col .nav_bar article:last-child {
+  border-bottom: none;
+}
+
+#nav_col .nav_bar .name {
+  /* border: 2px solid #ccc; */
+  height: 16px;
+  margin-bottom: 20px;
+  overflow: auto;
+}
+
+#nav_col .nav_bar .name a#setting {
+  float: right;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url(img/setting.png);
+}
+
+#nav_col .nav_bar .name h3 {
+  display: inline-block;
+  font-size: 1.0rem;
+  line-height: 1.0rem;
+  color: #37465d;
+  text-transform: uppercase;
+}
+
+#nav_col .nav_bar .content li {
+  overflow: auto;
+  height: 16px;
+  /* border: 1px dashed #ccc; */
+}
+
+#nav_col .nav_bar .content li + li {
+  margin-top: 15px;
+}
+
+#nav_col .nav_bar .content a {
+  font-size: 0.9rem;
+  line-height: 16px;
+  letter-spacing: 0.05rem;
+  color: #b7c0cd;
+}
+
+#nav_col .nav_bar .content li#products {
+  height: 24px;
+}
+
+#nav_col .nav_bar .content li#products span.icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 16px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+
+#nav_col .nav_bar .content li#products:nth-child(1) span {
+  background-image: url(img/product1.png);
+}
+
+#nav_col .nav_bar .content li#products:nth-child(2) span {
+  background-image: url(img/product2.png);
+}
+
+#nav_col .nav_bar .content li#products:nth-child(3) span {
+  background-image: url(img/product3.png);
+}
+
+#nav_col .nav_bar .content li#products:nth-child(4) span {
+  background-image: url(img/product4.png);
+}
+
+#nav_col .nav_bar .content span.count {
+  display: inline-block;
+  float: right;
+  width: 28px;
+  height: 16px;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  background-color: #2ea1f8;
+  border-radius: 8px;
+}
+
+#nav_col .nav_bar .content span.error {
+  display: inline-block;
+  float: right;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #ed1941;
+  border-radius: 8px;
+}
+
+#nav_col .goals {
+  position: fixed;
+  bottom: 0;
+  left: 100px;
+  width: inherit;
+}
+
+#nav_col .progress_bar {
+  margin: 0 20px;
+  margin-bottom: 20px;
+  color: #f1f2f3;
+  text-transform: capitalize;
+}
+
+#nav_col .progress_bar p {
+  /* border: 1px solid #ccc; */
+  display: block;
+  overflow: auto;
+  height: 16px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  line-height: 16px;
+  letter-spacing: 0.05rem;
+}
+
+#nav_col .progress_bar span:first-child {
+  float: left;
+}
+
+#nav_col .progress_bar span:last-child {
+  float: right;
+}
+
+.progress {
+  background-color: #ddd;
+}
+
+.curRate {
+  width: 25%;
+  background: linear-gradient(to right, #7f5be6, #9d8fe3);
+}
+
+.round-conner {
+  height: 4px;
+  border-radius: 2px;
 }
 
 #feature_area {
