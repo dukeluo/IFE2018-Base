@@ -50,7 +50,6 @@ a {
 }
 
 #app_col {
-  /* flex: 0 1 100px; */
   position: relative;
   width: 100px;
   background-color: #121a2a;
@@ -112,7 +111,6 @@ a {
 }
 
 #nav_col {
-  /* flex: 0 1 260px; */
   position: relative;
   width: 260px;
   padding-top: 30px;
@@ -134,7 +132,6 @@ a {
 }
 
 #nav_col .nav_bar .name {
-  /* border: 2px solid #ccc; */
   height: 16px;
   margin-bottom: 20px;
   overflow: auto;
@@ -159,7 +156,6 @@ a {
 #nav_col .nav_bar .content li {
   overflow: auto;
   height: 16px;
-  /* border: 1px dashed #ccc; */
 }
 
 #nav_col .nav_bar .content li + li {
@@ -245,7 +241,6 @@ a {
 }
 
 #nav_col .progress_bar p {
-  /* border: 1px solid #ccc; */
   display: block;
   overflow: auto;
   height: 16px;
@@ -278,24 +273,97 @@ a {
 }
 
 #feature_area {
-  border: 2px solid orange;
   width: calc(100% - 360px);
   padding-top: 80px;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
+  color: #515151;
 }
 
 #feature_area .administrator {
-  border: 1px dashed blue;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
-  width: 100%;
+  width: inherit;
   height: 80px;
+  background-color: #fffffb;
+  text-transform: capitalize;
+  overflow: hidden;
 }
 
+.avatar {
+  display: block;
+  width: 50px;
+  height: 50px;
+  /* background-color: #ccc; */
+}
+
+.arrow {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  /* background-color: black; */
+}
+
+.info {
+  width: 200px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.info .avatar {
+  float: left;
+  margin-right: 10px;
+}
+
+.info h3 {
+  display: block;
+  float: left;
+  margin: 5px 0;
+  font-size: 1.0rem;
+  line-height: 1.0rem;
+}
+
+.info p {
+  display: block;
+  float: left;
+  font-size: 0.8rem;
+  line-height: 0.8rem;
+}
+
+#feature_area .administrator > h3 {
+  float: left;
+  line-height: 80px;
+  margin-left: 20px;
+  letter-spacing: 0.05rem;
+}
+
+#feature_area .administrator .info {
+  float: right;
+  margin-top: 10px;
+}
+
+#feature_area .administrator .info .avatar {
+  background:
+  url(img/p0.png) 0 0 no-repeat,
+  url(img/status.png) 95% 95% no-repeat;
+}
+
+#feature_area .administrator .info h3 {
+  color: #0b64ff;
+}
+
+#feature_area .administrator .arrow {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background-image: url(img/down.png);
+  background-repeat: no-repeat;
+}
+
+
 #feature_area .message_summary {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 400px;
   float: left;
 }
@@ -303,5 +371,5 @@ a {
 #feature_area .message_content {
   float: left;
   width: calc(100% - 400px);
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
 }
