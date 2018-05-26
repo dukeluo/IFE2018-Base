@@ -11,7 +11,7 @@
 ### Flexbox相关概念及使用Flexobx进行布局的场景和方法？
 弹性盒子是一种新技术，如今各个浏览器都广泛支持，允许快速创建曾经被证明用CSS很难实现的一些复杂，灵活的布局和功能。  
 [Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)  
-P.S. 本来是想自己总结一篇的博文的，找资料的时候发现阮老师的文章，想想还是直接搬运吧
+[Flex 布局教程：实例篇](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html)  
 
 ### 掌握常用的两栏、三栏布局的各种方式？
 使用Float、Position或者Flexbox都可以传建两栏、三栏布局，应灵活应用，见课程编码任务。
