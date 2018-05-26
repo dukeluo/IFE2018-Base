@@ -50,6 +50,7 @@ a {
 }
 
 #app_col {
+  /* flex: 0 1 100px; */
   position: relative;
   width: 100px;
   background-color: #121a2a;
@@ -111,6 +112,7 @@ a {
 }
 
 #nav_col {
+  /* flex: 0 1 260px; */
   position: relative;
   width: 260px;
   padding-top: 30px;
@@ -232,6 +234,7 @@ a {
   bottom: 0;
   left: 100px;
   width: inherit;
+  background-color: #222c3c;
 }
 
 #nav_col .progress_bar {
@@ -275,5 +278,30 @@ a {
 }
 
 #feature_area {
-  /* display: flex; */
+  border: 2px solid orange;
+  width: calc(100% - 360px);
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+#feature_area .administrator {
+  border: 1px dashed blue;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 80px;
+}
+
+#feature_area .message_summary {
+  border: 1px solid red;
+  width: 400px;
+  float: left;
+}
+
+#feature_area .message_content {
+  float: left;
+  width: calc(100% - 400px);
+  border: 1px solid yellow;
 }
