@@ -46,6 +46,9 @@ a {
   display: flex;
   width: 100%;
   min-width: 1500px;
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
   background-color: #fffffb;
 }
 
@@ -296,21 +299,20 @@ a {
   display: block;
   width: 50px;
   height: 50px;
-  /* background-color: #ccc; */
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .arrow {
   display: inline-block;
   width: 11px;
   height: 11px;
-  /* background-color: black; */
 }
 
 .info {
   width: 200px;
   height: 50px;
   overflow: hidden;
-  /* outline: #00FF00 dotted 1px; */
 }
 
 .info .avatar {
@@ -366,7 +368,6 @@ a {
 }
 
 #feature_area .message_summary {
-  /* border: 1px solid red; */
   width: 400px;
   float: left;
 }
@@ -468,9 +469,181 @@ a {
   background-position: center;
 }
 
+#feature_area .message_summary .active_chat {
+  border-left: 2px solid #0b64ff;
+}
+
+#feature_area .message_summary .active_chat .info h3::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+  background-color: #0b64ff;
+}
+
+#feature_area .message_summary .active_chat .info h3 {
+  color: #0b64ff;
+}
+
+#feature_area .message_summary .active_chat .chat_summary {
+  overflow: auto;
+}
+
+#feature_area .message_summary .active_chat .chat_summary p {
+  display: inline-block;
+  width: 95%;
+  float: left;
+}
+
+#feature_area .message_summary .active_chat .chat_summary span.count {
+  display: inline-block;
+  float: right;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #2ea1f8;
+  border-radius: 8px;
+}
 
 #feature_area .message_content {
   float: left;
   width: calc(100% - 400px);
-  /* border: 1px solid yellow; */
+}
+
+#feature_area .message_content .title {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  padding: 0 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+#feature_area .message_content .title h3 {
+  flex-grow: 1;
+  font-size: 1.0rem;
+  line-height: 1.0rem;
+}
+
+#feature_area .message_content .title h3::after {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 5px;
+  border-radius: 5px;
+  background-color: #02bd70;
+}
+
+#feature_area .message_content .title .tools,
+#feature_area .message_content .title .page {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#feature_area .message_content .title p {
+  font-size: 0.8rem;
+  font-weight: bold;
+  line-height: 0.8rem;
+}
+
+#feature_area .message_content .title span {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f1f3f7;
+}
+
+#feature_area .message_content .title  span + span {
+  border-left: 1px solid #ccc;
+}
+
+#feature_area .message_content .title a {
+  display: block;
+  width: inherit;
+  height: inherit;
+  font-size: 0;
+  line-height: 0;
+}
+
+#feature_area .message_content .tools span:nth-child(1) {
+  background-image: url(img/tool1.png);
+}
+
+#feature_area .message_content .tools span:nth-child(2) {
+  background-image: url(img/tool2.png);
+}
+
+#feature_area .message_content .tools span:nth-child(3) {
+  background-image: url(img/tool3.png);
+}
+
+#feature_area .message_content .page span:nth-child(1) {
+  background-image: url(img/left.png);
+}
+
+#feature_area .message_content .page span:nth-child(2) {
+  background-image: url(img/right.png);
+}
+
+#feature_area .message_content article {
+  margin: 20px;
+  overflow: auto;
+  /* border: 2px solid #ccc; */
+}
+
+#feature_area .message_content article .avatar {
+  float: left;
+}
+
+#feature_area .message_content article .message_wrapper {
+  float: left;
+  width: calc(100% - 50px);
+  padding-left: 16px;
+  border: 2px solid yellow;
+}
+
+#feature_area .message_content article .who p {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 1.0rem;
+  line-height: 1.4rem;
+}
+
+#feature_area .message_content article .who p {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 1.0rem;
+  line-height: 1.4rem;
+}
+
+#feature_area .message_content article .content p {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+#feature_area .message_content article .content img {
+  margin-right: 10px;
+}
+
+#feature_area .message_content article:nth-child(odd) .avatar {
+  background-image: url(img/p1.png);
+}
+
+#feature_area .message_content article:nth-child(even) .avatar {
+  background-image: url(img/p6.png);
+}
+
+#feature_area .message_content .message_add {
+  border: 2px solid #ccc;
+  margin: 20px;
 }
