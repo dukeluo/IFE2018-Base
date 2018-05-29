@@ -293,6 +293,7 @@ a {
   background-color: #fffffb;
   text-transform: capitalize;
   overflow: hidden;
+  z-index: 8;
 }
 
 .avatar {
@@ -609,7 +610,6 @@ a {
   float: left;
   width: calc(100% - 50px);
   padding-left: 16px;
-  border: 2px solid yellow;
 }
 
 #feature_area .message_content article .who p {
@@ -631,10 +631,6 @@ a {
   line-height: 1.6rem;
 }
 
-#feature_area .message_content article .content img {
-  margin-right: 10px;
-}
-
 #feature_area .message_content article:nth-child(odd) .avatar {
   background-image: url(img/p1.png);
 }
@@ -643,7 +639,63 @@ a {
   background-image: url(img/p6.png);
 }
 
-#feature_area .message_content .message_add {
-  border: 2px solid #ccc;
+#feature_area .message_content .content img {
+  display: inline-block;
+  width: 156px;
+  height: 100px;
+  margin-right: 10px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#feature_area .message_content .message_time {
+    position: relative;
+    height: 1px;
+    width: 100%;
+    color: #7f8fa4;
+    background-color: #ccc;
+}
+
+#feature_area .message_content .message_time::after {
+  content: attr(date);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  font-size: 1.2rem;
+  transform: translate(-50%, -50%);
+  padding: 0 17px;
+  background-color: #fff;
+}
+
+#feature_area .message_content .message_time:nth-child(6) {
+  color: #0b64ff;
+  background-color: #0b64ff;
+}
+
+
+.message_add {
   margin: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.add_field {
+  flex: 1;
+  height: 60px;
+  padding-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 0 4px 4px 0;
+}
+
+.add_item {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: #f1f3f7;
+  background-image: url(img/add.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
 }
