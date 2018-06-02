@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>IFE ECMAScript</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="news-top" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>JS</span><a class="active" href="">Some Link2</a></li>
+                    <li><span>CSS</span><a href="">Some Link3</a></li>
+                    <li><span>JS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>
+        </div>
+        <div id="news-normal" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>HTML</span><a href="">Some Link2</a></li>
+                    <li><span>JS</span><a class="active" href="#">Some Link3</a></li>
+                    <li><span>CSS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>
+        </div>
+    </div>
+    <script>
+
+    function getAllListItem() {
+        // 返回页面中所有li标签
+        var result,
+            listItems,
+            i,
+            len;
+
+        result = [];
+        listItems = document.getElementsByTagName("li");
+        for (i = 0, len = listItems.length; i < len; i++) {
+          result.push(listItems[i]);
+        }
+        return result;
+    }
+
+    function findAllHtmlSpanInOneSection(sectionId) {
+        // 返回某个section下所有span中内容为HTML的span标签
+        var result,
+            sectionItem,
+            spanItems,
+            i,
+            len;
+
+        result = [];
+        sectionItem = document.getElementById(sectionId);
+        spanItems = sectionItem.getElementsByTagName("span");
+        for (i = 0, len = spanItems.length; i < len; i++) {
+          if (spanItems[i].childNodes[0].textContent === "HTML") {
+            result.push(spanItems[i]);
+          }
+        }
+        return result;
+    }
+
+    function findListItem(sectionId, spanCont) {
+        // 返回某个section下，所有所包含span内容为spanCont的LI标签
+        var result,
+            sectionItem,
+            liItems,
+            i,
+            len;
+
+        result = [];
+        sectionItem = document.getElementById(sectionId);
+        liItems = sectionItem.getElementsByTagName("li");
+        for (i = 0, len = liItems.length; i < len; i++) {
+          if (liItems[i].getElementsByTagName("span")[0].childNodes[0].textContent === spanCont) {
+            result.push(liItems[i]);
+          }
+        }
+        return result;
+    }
+
+    function getActiveLinkContent(sectionId) {
+        // 返回某个section下，class为active的链接中包含的文字内容
+        var result,
+            sectionItem,
+            aItems,
+            i,
+            len;
+
+        result = [];
+        sectionItem = document.getElementById(sectionId);
+        aItems = sectionItem.getElementsByTagName("a");
+        for (i = 0, len = aItems.length; i < len; i++) {
+          if (aItems[i].className === "active") {
+            result.push(aItems[i].childNodes[0].textContent);
+          }
+        }
+        return result;
+    }
+
+    </script>
+</body>
+</html>
