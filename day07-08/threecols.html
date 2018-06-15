@@ -24,12 +24,7 @@
       color: #fffffb;
     }
 
-    button:hover,
-    button:focus {
-      background-color: #00ae9d;
-    }
-
-    #style_selector {
+    #method_selector {
       width: 60%;
       min-width: 600px;
       height: 60px;
@@ -41,16 +36,25 @@
       border: none;
     }
 
-    #style_selector ul {
+    #method_selector ul {
       display: flex;
       justify-content: center;
     }
 
-    #style_selector li {
+    li {
       list-style: none;
     }
+/*
+    #method_selector button:hover {
+      background-color: #00ae9d;
+      color: #fffffb;
+    }
 
-    #style_selector li + li button {
+    #method_selector button:focus {
+      color: #f15a22;
+    }
+*/
+    #method_selector li + li button {
       border-left: 2px solid #aaa;
     }
 
@@ -70,25 +74,30 @@
       font-size: 16px;
       background-color: transparent;
     }
-
-    #layout_selector button:hover,
-    #layout_selector button:focus {
+/*
+    #layout_selector button:hover {
       background-color: #f15a22;
+      color: #fffffb;
     }
+
+    #layout_selector button:focus {
+      color: #f15a22;
+    }
+*/
   </style>
 </head>
 <body>
-  <div id="style_selector">
+  <div id="method_selector">
     <ul>
-      <li><button>Position</button></li>
-      <li><button>Flexbox</button></li>
-      <li><button>Float</button></li>
+      <li><button class="method_btn">Position</button></li>
+      <li><button class="method_btn">Flexbox</button></li>
+      <li><button class="method_btn">Float</button></li>
     </ul>
   </div>
   <div id="layout_selector">
     <ul>
-      <li><button>左侧、右侧固定宽度，中间自适应</button></li>
-      <li><button>左侧、中间固定宽度，右侧自适应</button></li>
+      <li><button class="layout_btn">左侧、右侧固定宽度，中间自适应</button></li>
+      <li><button class="layout_btn">左侧、中间固定宽度，右侧自适应</button></li>
     </ul>
   </div>
   <div id="wrapper">
@@ -110,22 +119,34 @@
   </div>
 </body>
 <script>
-// TODO: implement this i will come later
-  cssLink = document.querySelector("link");
-  layoutBtns = document.querySelectorAll("#layout_selector button");
-  styleBtns = document.querySelectorAll("#style_selector button");
-  for (var i = 0; i < layoutBtns.length; i++) {
-    for(var j = 0;j < styleBtns.length; j++) {
-      addHandler(styleBtns[j], i, j);
-    }
-  }
+    var methodBtns = document.querySelectorAll(".method_btn");
+    var layoutBtns = document.querySelectorAll(".layout_btn");
+    var methodBtnHandler,
+        layoutBtnHandler,
+        i;
 
-  function addHandler(btn, i, j) {
-    var num = i * styleBtns.length + j + 1;
-    var file_name = "threecols" + num +".css";
-    btn.addEventListener("click", function(event){
-      cssLink.href = file_name;
-    });
-  }
+    methodBtnHandler = function(event) {
+        switch (event.type) {
+            case "blur": {
+                event.target.style.backgroundColor = "#00ae9d";
+                event.target.style.color = "#fffffb";
+                break;
+            }
+            case "focus": {
+                event.target.style.color = "#f15a22";
+                break;
+            }
+        }
+    }
+
+    for (i = 0; i < methodBtns.length; i++) {
+        methodBtns[i].onblur = methodBtnHandler;
+        methodBtns[i].onfocus = methodBtnHandler;
+        console.log(methodBtns[i]);
+    }
+    // var isSupported = document.implementation.hasFeature("FocusEvent", "3.0");
+    // alert(isSupported);
+    // console.log(methodBtns);
+
 </script>
 </html>
