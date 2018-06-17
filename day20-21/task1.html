@@ -9,5 +9,20 @@
 <body>
   <input id="name" type="text">
   <button id="submit-btn">Submit</button>
+  <script>
+      function logName(event) {
+          console.log(document.querySelector("#name").value);
+      }
+      document.querySelector("#submit-btn").onclick = logName;
+
+      function inputHandler(event) {
+          if (event.keyCode === 13) {
+              console.log(document.querySelector("#name").value);
+          } else if (event.keyCode === 27) {
+              document.querySelector("#name").value = "";
+          }
+      }
+      document.querySelector("#name").onkeypress = inputHandler;
+  </script>
 </body>
 </html>
