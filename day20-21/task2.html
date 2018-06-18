@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day20-21</title>
+  <style>
+    select {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <label>
+    <input id="school" name="status" type="radio">
+    School
+  </label>
+  <label>
+    <input id="company" name="status" type="radio">
+    Company
+  </label>
+
+  <select id="school-select">
+    <option>北京邮电大学</option>
+    <option>黑龙江大学</option>
+    <option>华中科技大学</option>
+  </select>
+
+  <select id="company-select">
+    <option>百度</option>
+    <option>爱奇艺</option>
+  </select>
+  <script>
+      function showSchool(event) {
+          document.querySelector("#school-select").style.display = "inline-block";
+      }
+      function showCompany(event) {
+          document.querySelector("#company-select").style.display = "inline-block";
+      }
+      function hiddenSchool(event) {
+          document.querySelector("#school-select").style.display = "none";
+      }
+      function hiddenCompany(event) {
+          document.querySelector("#company-select").style.display = "none";
+      }
+      document.querySelector("#school").addEventListener("click", showSchool);
+      document.querySelector("#school").addEventListener("click", hiddenCompany);
+      document.querySelector("#company").addEventListener("click", showCompany);
+      document.querySelector("#company").addEventListener("click", hiddenSchool);
+  </script>
+</body>
+</html>
