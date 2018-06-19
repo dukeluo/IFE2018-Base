@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day20-21</title>
+</head>
+<body>
+  <div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+  <button id="fade-btn">淡出</button>
+
+<!--
+<script>
+      var fadeObj,
+          fadeBtn,
+          timeoutId1,
+          timeoutId2,
+          opacityVal;
+
+      fadeObj = document.querySelector("#fade-obj");
+      fadeBtn = document.querySelector("#fade-btn");
+      opacityVal = 1.0;
+      function fadeOutStart() {
+          opacityVal -= 0.02;
+          fadeObj.style.opacity = opacityVal;
+          fadeBtn.disabled = true;
+          timeoutId1 = setTimeout(fadeOutStart, 100);
+          timeoutId2 = setTimeout(fadeOutEnd, 0);
+      }
+      function fadeOutEnd() {
+          if (opacityVal <= 0) {
+              clearTimeout(timeoutId1);
+              clearTimeout(timeoutId2);
+              fadeBtn.disabled = false;
+              fadeBtn.innerHTML = "淡入";
+          }
+      }
+      fadeBtn.addEventListener("click", fadeOutStart);
+      fadeBtn.addEventListener("click", fadeOutEnd);
+      function fadeInStart() {
+          opacityVal += 0.02;
+          fadeObj.style.opacity = opacityVal;
+          fadeBtn.disabled = true;
+          timeoutId1 = setTimeout(fadeInStart, 100);
+          timeoutId2 = setTimeout(fadeInEnd, 0);
+      }
+      function fadeInEnd() {
+          if (opacityVal >= 1) {
+              clearTimeout(timeoutId1);
+              clearTimeout(timeoutId2);
+              fadeBtn.disabled = false;
+              fadeBtn.innerHTML = "淡出";
+          }
+      }
+      fadeBtn.addEventListener("click", fadeInStart);
+      fadeBtn.addEventListener("click", fadeInEnd);
+  </script>
+ -->
+
+<script>
+    var fadeObj,
+    fadeBtn,
+    intervalId1,
+    intervalId2,
+    opacityVal;
+
+    fadeObj = document.querySelector("#fade-obj");
+    fadeBtn = document.querySelector("#fade-btn");
+    opacityVal = 1;
+    function fadeOut(min) {
+        fadeBtn.disabled = true;
+        opacityVal -= 0.02;
+        fadeObj.style.opacity = opacityVal;
+        if (opacityVal <= min) {
+            clearInterval(intervalId1);
+            fadeBtn.disabled = false;
+            fadeBtn.innerHTML = "淡入";
+        }
+    }
+    function fadeOutStart() {
+        intervalId1 = setInterval(fadeOut, 100, 0);
+    }
+    fadeBtn.addEventListener("click", fadeOutStart);
+    function fadeIn(max) {
+        fadeBtn.disabled = true;
+        opacityVal += 0.02;
+        fadeObj.style.opacity = opacityVal;
+        if (opacityVal >= max) {
+            clearInterval(intervalId2);
+            fadeBtn.disabled = false;
+            fadeBtn.innerHTML = "淡出";
+        }
+    }
+    function fadeInStart() {
+        intervalId2 = setInterval(fadeIn, 100, 1);
+    }
+    fadeBtn.addEventListener("click", fadeInStart);
+</script>
+
+</body>
+</html>
