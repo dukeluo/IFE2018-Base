@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day20-21</title>
+  <style>
+    #erikface {
+      margin: 0 auto;
+      width: 480px;
+      height: 480px;
+      background-color: #ccc;
+      background-image: url(erik_smile.jpg);
+      background-repeat: no-repeat;
+      background-position: 0 -480px;
+    }
+  </style>
+</head>
+<body>
+  <div id="erikface"></div>
+</body>
+
+<script type="text/javascript">
+    var erikface,
+        faceHeight,
+        pattern,    // inc or dec;
+        yVal,
+        i;
+
+    erikface = document.querySelector("#erikface");
+    faceHeight = parseInt(window.getComputedStyle(erikface, null).height);
+    pattern = 0;
+    yVal = 0;
+    function changeBgPos(miny, maxy) {
+        if (pattern === 1) {
+            yVal += faceHeight;
+        } else if (pattern === 0) {
+            yVal -= faceHeight;
+        }
+
+        if (yVal === miny) {
+            pattern = 1;
+        }
+        if (yVal === maxy) {
+            pattern = 0;
+        }
+        // console.log(yVal);
+        erikface.style.backgroundPosition = "0 " + yVal +"px";
+    }
+    setInterval(changeBgPos, 100, -16*faceHeight, 0);
+</script>
+</html>
