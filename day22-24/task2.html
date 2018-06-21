@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day22-24</title>
+</head>
+<body>
+  <div>
+    <label>String A:
+        <input id="radio-a" type="radio" checked="true" name="str-obj" value="a">
+    </label>
+    <textarea id="str-a"></textarea>
+    <label>String B:
+        <input id="radio-b" type="radio" name="str-obj" value="b">
+    </label>
+    <textarea id="str-b"></textarea>
+    <label>Num A：<input id="num-a" type="number" value="0"></label>
+    <label>Num B：<input id="num-b" type="number" value="1"></label>
+  </div>
+  <div>
+    <button>获取当前选中输入的内容长度</button>
+    <button>当前选中输入中的第3个字符</button>
+    <button>把两个输入框的文字连接在一起输出（concat）</button>
+    <button>输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
+    <button>输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
+    <button>使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
+    <button>当前选中输入框的行数</button>
+    <button>使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
+    <button>把所选输入框中的内容全部转为大写</button>
+    <button>把所选输入框中的内容全部转为小写</button>
+    <button>把所选输入框中内容的半角空格全部去除</button>
+    <button>把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
+  </div>
+  <p id="result"></p>
+
+  <script type="text/javascript">
+      var radios,
+          btns,
+          res,
+          numaInput,
+          numbInput,
+          straInput,
+          strbInput,
+          i;
+
+      radios = document.getElementsByName("str-obj");
+      btns = document.getElementsByTagName("button");
+      res = document.getElementById("result");
+      numaInput = document.getElementById("num-a");
+      numbInput = document.getElementById("num-b");
+      straInput = document.getElementById("str-a");
+      strbInput = document.getElementById("str-b");
+      btns[0].onclick = function(event) {
+          var selected;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          res.innerHTML = (selected.value === "a" ? straInput : strbInput).value.length;
+      }
+
+      btns[1].onclick = function(event) {
+          var selected,
+              str;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          str = (selected.value === "a" ? straInput : strbInput).value;
+          if (str.length < 3) {
+              res.innerHTML = null;
+              console.log("WARNING: The length of input is less than 3");
+              return ;
+          }
+          res.innerHTML = str[2];
+      }
+
+      btns[2].onclick = function(event) {
+          res.innerHTML = straInput.value.concat(strbInput.value);
+      }
+
+      btns[3].onclick = function(event) {
+          res.innerHTML = straInput.value.indexOf(strbInput.value);
+      }
+
+      btns[4].onclick = function(event) {
+          res.innerHTML = straInput.value.lastIndexOf(strbInput.value);
+      }
+
+      btns[5].onclick = function(event) {
+          var selected,
+              str;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          str = (selected.value === "a" ? straInput : strbInput).value;
+          res.innerHTML = str.slice(numaInput.value, numbInput.value);
+      }
+
+      function countLines(t) {
+          var c,
+            i;
+
+          if (t === null || t === "") {
+              return 0;
+          }
+          c = 0;
+          for (i = 0; i < t.length; i++) {
+              if (t[i] == "\n") {
+                  c++;
+              }
+          }
+          return c + 1;
+      }
+      btns[6].onclick = function(event) {
+          var selected,
+              str;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          str = (selected.value === "a" ? straInput : strbInput).value;
+          res.innerHTML = countLines(str);
+      }
+
+      btns[7].onclick = function(event) {
+          var selected,
+              str;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          str = (selected.value === "a" ? straInput : strbInput).value;
+          res.innerHTML = str.substr(numaInput.value, numbInput.value);
+      }
+
+      btns[8].onclick = function(event) {
+          var selected,
+              str;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          str = (selected.value === "a" ? straInput : strbInput).value;
+          res.innerHTML = str.toUpperCase();
+      }
+
+      btns[9].onclick = function(event) {
+          var selected,
+              str;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          str = (selected.value === "a" ? straInput : strbInput).value;
+          res.innerHTML = str.toLowerCase();
+      }
+
+      btns[10].onclick = function(event) {
+          var selected,
+              str;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          str = (selected.value === "a" ? straInput : strbInput).value;
+          res.innerHTML = str.replace(/\040/g, "");
+      }
+
+      btns[11].onclick = function(event) {
+          var selected,
+              noSelected,
+              str1,
+              str2;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          str1 = (selected.value === "a" ? straInput : strbInput).value;
+          str2 = (selected.value === "a" ? strbInput : straInput).value;
+          res.innerHTML = str1.replace(/a/g, str2);
+      }
+  </script>
+</body>
+</html>
