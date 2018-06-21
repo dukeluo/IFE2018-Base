@@ -109,21 +109,6 @@
           res.innerHTML = str.slice(numaInput.value, numbInput.value);
       }
 
-      function countLines(t) {
-          var c,
-            i;
-
-          if (t === null || t === "") {
-              return 0;
-          }
-          c = 0;
-          for (i = 0; i < t.length; i++) {
-              if (t[i] == "\n") {
-                  c++;
-              }
-          }
-          return c + 1;
-      }
       btns[6].onclick = function(event) {
           var selected,
               str;
@@ -135,7 +120,7 @@
               }
           }
           str = (selected.value === "a" ? straInput : strbInput).value;
-          res.innerHTML = countLines(str);
+          res.innerHTML = str.split(/\r|\r\n|\n/).length;
       }
 
       btns[7].onclick = function(event) {
