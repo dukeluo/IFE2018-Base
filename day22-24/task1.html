@@ -25,9 +25,164 @@
 
   <script type="text/javascript">
       function isNumber(a) {
-        return typeof a === "number";
+          if (a !== null && a !== "") {
+              return !isNaN(a);
+          }
+          return false;
+      }
+      function roundingSpecifiedNums(a, b) {
+          return a.toFixed(b);
+      }
+      function abs(a) {
+          return Math.abs(a);
+      }
+      function ceiling(a) {
+          return Math.ceil(a);
+      }
+      function floor(a) {
+          return Math.floor(a);
+      }
+      function round(a) {
+          return Math.round(a);
+      }
+      function max(a, b) {
+          return Math.max(a, b);
+      }
+      function min(a, b) {
+          return Math.min(a, b);
+      }
+
+      var radios,
+          btns,
+          res,
+          a,
+          b,
+          i;
+
+      radios = document.getElementsByName("math-obj");
+      btns = document.getElementsByTagName("button");
+      res = document.getElementById("result");
+      a = document.getElementById("num-a");
+      b = document.getElementById("num-b");
+      btns[0].onclick = function(event) {
+          var selected,
+              num;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          num = (selected.value === "a" ? a : b).value;
+          res.innerHTML = isNumber(num);
+      }
+
+      btns[1].onclick = function(event) {
+          if (!isNumber(a.value)) {
+              console.log("WARNING: The input of Number A is not a number");
+          }
+          if (!isNumber(b.value)) {
+              console.log("WARNING: The input of Number B is not a number");
+              return ;
+          }
+          res.innerHTML = roundingSpecifiedNums(parseFloat(a.value), parseInt(b.value));
+      }
+
+      btns[2].onclick = function(event) {
+          var selected,
+              num;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          num = (selected.value === "a" ? a : b).value;
+          if (!isNumber(num)) {
+              console.log("WARNING: The input is not a number");
+              return ;
+          }
+          res.innerHTML = abs(parseFloat(num));
+      }
+
+      btns[3].onclick = function(event) {
+          var selected,
+              num;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          num = (selected.value === "a" ? a : b).value;
+          if (!isNumber(num)) {
+              console.log("WARNING: The input is not a number");
+              return ;
+          }
+          res.innerHTML = ceiling(parseFloat(num));
+      }
+
+      btns[4].onclick = function(event) {
+          var selected,
+              num;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          num = (selected.value === "a" ? a : b).value;
+          if (!isNumber(num)) {
+              console.log("WARNING: The input is not a number");
+              return ;
+          }
+          res.innerHTML = floor(parseFloat(num));
+      }
+
+
+      btns[5].onclick = function(event) {
+          var selected,
+              num;
+
+          for (i = 0; i < radios.length; i++) {
+              if (radios[i].checked) {
+                  selected = radios[i];
+                  break;
+              }
+          }
+          num = (selected.value === "a" ? a : b).value;
+          if (!isNumber(num)) {
+              console.log("WARNING: The input is not a number");
+              return ;
+          }
+          res.innerHTML = round(parseFloat(num));
+      }
+
+      btns[6].onclick = function(event) {
+          if (!isNumber(a.value)) {
+              console.log("WARNING: The input of Number A is not a number");
+          }
+          if (!isNumber(b.value)) {
+              console.log("WARNING: The input of Number B is not a number");
+              return ;
+          }
+          res.innerHTML = max(parseFloat(a.value), parseFloat(b.value));
+      }
+
+      btns[7].onclick = function(event) {
+          if (!isNumber(a.value)) {
+              console.log("WARNING: The input of Number A is not a number");
+          }
+          if (!isNumber(b.value)) {
+              console.log("WARNING: The input of Number B is not a number");
+              return ;
+          }
+          res.innerHTML = min(parseFloat(a.value), parseFloat(b.value));
       }
   </script>
-
 </body>
 </html>
