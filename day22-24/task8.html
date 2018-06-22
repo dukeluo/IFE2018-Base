@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day22-24</title>
+</head>
+<body>
+  <input id="stack-input" type="text">
+  <p id="stack-cont">栈内容：apple&lt;-pear</p>
+  <button id="push-btn">进栈</button>
+  <button id="pop-btn">退栈</button>
+  <button id="font-btn">打印栈顶元素内容</button>
+  <button id="empty-btn">判断栈是否为空</button>
+
+  <script type="text/javascript">
+      // reverse stack
+      var stack = ["apple", "pear"];
+      var btns,
+          stackCont;
+
+      btns = document.querySelectorAll("button");
+      stackCont = document.querySelector("#stack-cont");
+      btns[0].onclick = function(event) {
+          var stackInput,
+              inputItem;
+
+          stackInput = document.querySelector("#stack-input");
+          inputItem = stackInput.value;
+          if (inputItem !== "") {
+              stack.unshift(inputItem);
+          }
+          stackCont.innerHTML = "队列内容：" + stack.join("<-");
+          stackInput.value = "";
+      }
+
+      btns[1].onclick = function(event) {
+          stack.shift();
+          stackCont.innerHTML = "队列内容：" + stack.join("<-");
+      }
+
+      btns[2].onclick = function(event) {
+          console.log("first element in the stack: " + stack[0]);
+      }
+
+      btns[3].onclick = function(event) {
+          (stack.length === 0) ? console.log("stack is empty") : console.log("stack is not empty");
+      }
+  </script>
+</body>
+</html>
