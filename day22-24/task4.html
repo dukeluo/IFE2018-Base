@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day22-24</title>
+</head>
+<body>
+  <script type="text/javascript">
+      var tree = {
+          "id": 0,
+          "name": "root",
+          "left": {
+              "id": 1,
+              "name": "Simon",
+              "left": {
+                  "id": 3,
+                  "name": "Carl",
+                  "left": {
+                      "id": 7,
+                      "name": "Lee",
+                      "left": {
+                          "id": 11,
+                          "name": "Fate"
+                      }
+                  },
+                  "right": {
+                      "id": 8,
+                      "name": "Annie",
+                      "left": {
+                          "id": 12,
+                          "name": "Saber"
+                      }
+                  }
+              },
+              "right": {
+                  "id": 4,
+                  "name": "Tony",
+                  "left": {
+                      "id": 9,
+                      "name": "Candy"
+                  }
+              }
+          },
+          "right": {
+              "id": 2,
+              "name": "right",
+              "left": {
+                  "id": 5,
+                  "name": "Carl",
+              },
+              "right": {
+                  "id": 6,
+                  "name": "Carl",
+                  "right": {
+                      "id": 10,
+                      "name": "Kai"
+                  }
+              }
+          }
+      }
+
+      // 假设id和name均不会重复，根据输入name找到对应的id
+      function findIdByName(name) {
+          var res,
+              helper;
+
+          helper = function(n, t) {
+              if (!t) {
+                  return ;
+              }
+              if (t["name"] === name) {
+                  res = t["id"];
+                  return ;
+              }
+              helper(name, t["left"]);
+              helper(name, t["right"]);
+          }
+          helper(name, tree);
+          if (!res) {
+              return null;
+          }
+          return res;
+      }
+
+      // 假设id和name均不会重复，根据输入id找到对应的name
+      function findNameById(id) {
+          var res,
+              helper;
+
+          helper = function(id, t) {
+              if (!t) {
+                  return ;
+              }
+              if (t["id"] === id) {
+                  res = t["name"];
+                  return ;
+              }
+              helper(id, t["left"]);
+              helper(id, t["right"]);
+          }
+          helper(id, tree);
+          if (!res) {
+              return null;
+          }
+          return res;
+      }
+
+      // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+      function getListWithDLR() {
+          var helper;
+
+          helper = function(t) {
+              if (!t) {
+                  return ;
+              }
+              console.log(t["name"]);
+              helper(t["left"]);
+              helper(t["right"]);
+          }
+          helper(tree);
+      }
+
+      // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+      function getListWithLDR() {
+        var helper;
+
+        helper = function(t) {
+            if (!t) {
+                return ;
+            }
+            helper(t["left"]);
+            console.log(t["name"]);
+            helper(t["right"]);
+        }
+        helper(tree);
+      }
+
+      // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+      function getListWithLRD() {
+        var helper;
+
+        helper = function(t) {
+            if (!t) {
+                return ;
+            }
+            helper(t["left"]);
+            helper(t["right"]);
+            console.log(t["name"]);
+        }
+        helper(tree);
+      }
+  </script>
+</body>
+</html>
