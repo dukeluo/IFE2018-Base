@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day22-24</title>
+</head>
+<body>
+  <script type="text/javascript">
+      /*
+      实现一个字符串头尾去除空格的函数
+      注意需要去除的空格，包括全角、半角空格
+      暂时不需要学习和使用正则表达式的方式
+      */
+      function diyTrim(str) {
+          var result,
+              i,
+              j;
+
+          if (str === "" || str === null) {
+              return null;
+          }
+          for (i = 0; i < str.length && (str.charCodeAt(i) === 32 || str.charCodeAt(i) === 12288); i++)
+              ;
+          for (j = str.length-1; j >= 0 && (str.charCodeAt(j) === 32 || str.charCodeAt(j) === 12288); j--)
+              ;
+          result = str.slice(i, j+1);
+          return result;
+      }
+
+      // 测试用例
+      console.log(diyTrim(' a f b    ')); // ->a f b
+      console.log(diyTrim('    ffdaf    ')); // ->ffdaf
+      console.log(diyTrim('1    ')); // ->1
+      console.log(diyTrim('　　f')); // ->f
+      console.log(diyTrim('  　  a f b 　　 ')); // ->a f b
+      console.log(diyTrim(' ')); // ->
+      console.log(diyTrim('　')); // ->
+      console.log(diyTrim('')); // ->
+
+      /*
+      去掉字符串str中，连续重复的地方
+      */
+      function removeRepetition(str) {
+          var result,
+              i,
+              j;
+
+          if (str === "" || str === null) {
+              return null;
+          }
+          result = "";
+          for (i = 0, j = 0; i < str.length; i++) {
+              if (str[i] != str[j]) {
+                  result += str[j];
+                  j = i;
+              }
+          }
+          result += str[j];
+          return result;
+      }
+
+      // 测试用例
+      console.log(removeRepetition("aaa")); // ->a
+      console.log(removeRepetition("abbba")); // ->aba
+      console.log(removeRepetition("aabbaabb")); // ->abab
+      console.log(removeRepetition("")); // ->
+      console.log(removeRepetition("abc")); // ->abc
+  </script>
+</body>
+</html>
