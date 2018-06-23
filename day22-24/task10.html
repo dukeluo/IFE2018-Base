@@ -46,19 +46,45 @@
           res.push(scoreObject[item]["Music"]);
           return res;
       });
-      var menuArr = menuArr.sort(function(a1, a2) {
-          if (a1[1] < a2[1]) {
-              return -1;
-          } else if (a1[1] > a2[1]) {
-              return 1;
-          } else {
-              return 0;
-          }
-      });
-      console.log(menuArr);
-      // var menuObject;
-      // menuObject =
+      // console.log(scoreArray);
 
+      // [1, "Area1", -1] 中第一项为自身ID，第二项为自身名字，第三项为父目录ID
+      // 根目录的父目录ID为-1
+      function menuArrToObject(parentID) {
+          var object,
+              i,
+              j,
+              isParent;
+
+          object = {};
+          for (i = 0; i < menuArr.length; i++) {
+              if (menuArr[i][2] === parentID) {
+                  isParent = false;
+                  // 此目录是否还为其他目录的父目录
+                  for (j = 0; j < menuArr.length; j++) {
+                      if (menuArr[j][2] === menuArr[i][0]) {
+                          isParent = true;
+                          break;
+                      }
+                  }
+                  if (isParent) {
+                      object[menuArr[i][0]] = {
+                          name: menuArr[i][1],
+                          subMenu: menuArrToObject(menuArr[i][0])
+                      }
+                  } else {
+                      object[menuArr[i][0]] = {
+                          name: menuArr[i][1]
+                      }
+                  }
+              }
+          }
+          return object;
+      }
+
+      var menuObject;
+      menuObject = menuArrToObject(-1);
+      // console.log(menuObject);
   </script>
 </body>
 </html>
