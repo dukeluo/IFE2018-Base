@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day22-24</title>
+</head>
+<body>
+  <script type="text/javascript">
+      var arr1 = [43, 54, 4, -4, 84, 100, 58, 27, 140];
+      var arr2 = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];
+      var arr3 = [[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]];
+      var arr4 = [
+          {
+              id: 1,
+              name: 'candy',
+              value: 40
+          }, {
+              id: 2,
+              name: 'Simon',
+              value: 50
+          }, {
+              id: 3,
+              name: 'Tony',
+              value: 45
+          }, {
+              id: 4,
+              name: 'Annie',
+              value: 60
+          }
+      ];
+
+      console.log(arr1.sort(function(a, b) {
+          return b - a;
+      }));
+      console.log(arr1.sort(function(a, b) {
+          return a - b;
+      }));
+      console.log(arr2.sort());
+      console.log(arr2.sort(function(s1, s2) {
+          if (s1 < s2) {
+              return 1;
+          } else if (s1 > s2) {
+              return -1;
+          } else {
+              return 0;
+          }
+      }));
+      console.log(arr3.sort(function(a1, a2) {
+          return a2[1] - a1[1];
+      }));
+      console.log(arr4.sort(function(o1, o2) {
+          return o1.value - o2.value;
+      }));
+  </script>
+</body>
+</html>
