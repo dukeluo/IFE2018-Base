@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day25-27</title>
+</head>
+<body>
+  <div id="clock1"></div>
+  <div id="clock2"></div>
+
+  <script type="text/javascript">
+      function getDayStrZh(date) {
+          var week;
+
+          week = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+          return week[date.getDay()];
+      }
+
+      function getDayStrEn(date) {
+          var week;
+
+          week = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+          return week[date.getDay()];
+      }
+
+      function checkTime(n) {
+          return n < 10 ? "0"+n : ""+n;
+      }
+
+      function formatAMPM(date) {
+          var hours,
+              minutes,
+              seconds,
+              ampm,
+              strTime;
+
+          hours = date.getHours();
+          minutes = date.getMinutes();
+          seconds = date.getSeconds();
+          ampm = hours >= 12 ? 'pm' : 'am';
+          hours = hours % 12;
+          hours = hours ? hours : 12;
+          hours = checkTime(hours);
+          minutes = checkTime(minutes);
+          seconds = checkTime(seconds);
+          strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+          return strTime;
+      }
+
+      function startDisplayCurrrentTime1() {
+          var date,
+              text,
+              clock1;
+
+          date = new Date();
+          text = "";
+          clock1 = document.querySelector("#clock1");
+          text += date.getFullYear() + "年";
+          text += checkTime(date.getMonth()+1) + "月";
+          text += checkTime(date.getDate()) + "日";
+          text += getDayStrZh(date);
+          text += checkTime(date.getHours()) + ":" + checkTime(date.getMinutes()) + ":" + checkTime(date.getSeconds());
+          clock1.innerHTML = "时钟1: " + text;
+          setTimeout(startDisplayCurrrentTime1, 1000);
+      }
+
+      function startDisplayCurrrentTime2() {
+          var date,
+              text,
+              clock2;
+
+          date = new Date();
+          text = "";
+          clock2 = document.querySelector("#clock2");
+          text += date.getFullYear() + "-" + checkTime(date.getMonth()+1) + "-" + checkTime(date.getDate());
+          text += " " + getDayStrEn(date);
+          text += " " + formatAMPM(date);
+          clock2.innerHTML = "时钟2: " + text;
+          setTimeout(startDisplayCurrrentTime2, 1000);
+      }
+      setTimeout(startDisplayCurrrentTime1, 1000);
+      setTimeout(startDisplayCurrrentTime2, 1000);
+  </script>
+</body>
+</html>
