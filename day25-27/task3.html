@@ -248,55 +248,117 @@
   <p id="result-wrapper"></p>
 
   <script type="text/javascript">
+      // 判断是否是闰年
       function isLeapYear(n) {
           return ((n % 4 === 0 && n % 100 !== 0) || n % 400 === 0);
       }
 
+      // 隐藏多余选项
       function hideOption(p) {
           var span;
 
-          parent = p.parentNode;
           span = document.createElement("span");
           span.style.display = "none";
           span.innerHTML = p.outerHTML;
-          parent.replaceChild(span, p);
+          p.parentNode.replaceChild(span, p);
       }
 
-      function adjustDays(year, month) {
-          console.log(year + month);
-          switch (month) {
+      // 显示隐藏项
+      function showOption(s) {
+          var option,
+              val;
+
+          option = document.createElement("option");
+          val = +s.children[0].innerHTML;
+          option.value = val;
+          option.innerHTML = val;
+          s.parentNode.replaceChild(option, s);
+      }
+
+      // 调整一个月中日期选项
+      function adjustDaySelect() {
+          var year,
+              month,
+              e1,
+              e2,
+              e3;
+
+          year = getSelectedOptionValue("year-select");
+          month = getSelectedOptionValue("month-select");
+          e1 = document.querySelector("#day-select").children[30];    // 31
+          e2 = document.querySelector("#day-select").children[29];    // 30
+          e3 = document.querySelector("#day-select").children[28];    // 29
+          switch (+month) {
               case 1: case 3: case 5: case 7:
               case 8: case 10: case 12:
+                  if (e1.nodeName.toLowerCase() === "span") {
+                      showOption(e1);
+                  }
+                  if (e2.nodeName.toLowerCase() === "span") {
+                      showOption(e2);
+                  }
+                  if (e3.nodeName.toLowerCase() === "span") {
+                      showOption(e3);
+                  }
                   break;
               case 4: case 6: case 9: case 11:
-                  hideOption(document.querySelector("#day-select > option:last-child"));
+                  if (e1.nodeName.toLowerCase() === "option") {
+                      hideOption(e1);
+                  }
+                  if (e2.nodeName.toLowerCase() === "span") {
+                      showOption(e2);
+                  }
+                  if (e3.nodeName.toLowerCase() === "span") {
+                      showOption(e3);
+                  }
                   break;
               case 2:
-                  hideOption(document.querySelector("#day-select > option:last-child"));
-                  hideOption(document.querySelector("#day-select > option:last-child"));
+                  if (e1.nodeName.toLowerCase() === "option") {
+                      hideOption(e1);
+                  }
+                  if (e2.nodeName.toLowerCase() === "option") {
+                      hideOption(e2);
+                  }
                   if (!isLeapYear(year)) {
-                      hideOption(document.querySelector("#day-select > option:last-child"));
+                      if (e3.nodeName.toLowerCase() === "option") {
+                          hideOption(e3);
+                      }
                   }
                   break;
           }
+          document.querySelector("#day-select option:first-child").selected = "true";
       }
 
-      function getSelectedOption(selectId) {
+      // 为年、月选择框添加事件
+      var yearSelect,
+          monthSelect;
+
+      yearSelect = document.querySelector("#year-select");
+      monthSelect = document.querySelector("#month-select");
+      yearSelect.onclick = adjustDaySelect;
+      monthSelect.onclick = adjustDaySelect;
+
+
+      // 取得每个选择框选中的值
+      function getSelectedOptionValue(selectId) {
           var options,
               i;
 
           options = document.querySelectorAll("#" + selectId + " option");
           for (i = 0; i < options.length; i++) {
               if (options[i].selected) {
-                  return options[i];
+                  return options[i].value;
               }
           }
       }
 
+      // 调整时间的字符串形式
       function checkTime(n) {
           return n < 10 ? "0"+n : ""+n;
       }
 
+      // 计算选中的时间
+      // 返回一个对象，包括选中时间的Date形式和字符串形式
       function selectedTime() {
           var year,
               month,
@@ -311,22 +373,24 @@
 
           resObj = {};
           week = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
-          year = getSelectedOption("year-select").value;
-          month = getSelectedOption("month-select").value;
-          day = getSelectedOption("day-select").value;
-          hour = getSelectedOption("hour-select").value;
-          minute = getSelectedOption("minute-select").value;
-          second = getSelectedOption("second-select").value;
-          dateValue = new Date(year, month-1, day, hour, second, second);
+          year = getSelectedOptionValue("year-select");
+          month = getSelectedOptionValue("month-select");
+          day = getSelectedOptionValue("day-select");
+          hour = getSelectedOptionValue("hour-select");
+          minute = getSelectedOptionValue("minute-select");
+          second = getSelectedOptionValue("second-select");
+          dateValue = new Date(year, month-1, day, hour, minute, second);
           resObj.dateValue = dateValue;
           strValue = "";
           strValue += year + "年" + month + "月" + day + "日";
           strValue += week[dateValue.getDay()];
-          strValue += " " + checkTime(hour) + ":" + checkTime(minute) + ":" + checkTime(second) + " ";
+          strValue += checkTime(hour) + ":" + checkTime(minute) + ":" + checkTime(second) + " ";
           resObj.strValue = strValue;
           return resObj;
       }
 
+      // 计算当前时间与选中时间的差值
+      // 返回差值字符串形式
       function timeDiff() {
           var year,
               month,
@@ -349,29 +413,21 @@
           minute = diff.getUTCMinutes();
           second = diff.getUTCSeconds();
           strValue = "";
-          strValue += (now - selected > 0) ? "已经过去 " : "还有 ";
+          strValue += (now - selected > 0) ? "已经过去" : "还有";
           strValue += year + "年" + month + "月" + day + "日";
           strValue += hour + "小时" + minute + "分" + second + "秒";
           return strValue;
       }
 
-      function disResult() {
+      // 显示结果
+      function startDisplayResult() {
           var p;
 
           p = document.querySelector("#result-wrapper");
           p.innerHTML = "现在距离" + selectedTime().strValue + timeDiff();
+          setTimeout(startDisplayResult, 1000);
       }
-
-      var selects,
-          i;
-
-      selects = document.querySelectorAll("select");
-      for (i = 0; i < selects.length; i++) {
-          selects[i].onclick = function(event) {
-              adjustDays(getSelectedOption("year-select").value, +getSelectedOption("month-select").value);
-              disResult();
-          }
-      }
+      setTimeout(startDisplayResult, 1000);
   </script>
 
 </body>
