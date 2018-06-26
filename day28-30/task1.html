@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day28-30</title>
+</head>
+<body>
+  <div class="wrapper">
+    <input id="email-input" type="text">
+    <ul id="email-sug-wrapper" class="email-sug"></ul>
+  </div>
+
+  <script type="text/javascript">
+      // 邮箱后缀List参考
+      var emailInput;
+
+      emailInput = document.querySelector("input#email-input");
+      emailInput.oninput = function(event) {
+          var input,
+              sugHTML;
+
+          input = getInput();
+          sugHTML = generateSugs(input);
+          addSugWrapper(sugHTML);
+          toggleSugBox(input);
+      }
+
+      // 获取用户输入
+      function getInput() {
+          return emailInput.value.trim();
+      }
+
+      // 生成提示框中的提示内容
+      function generateSugs(input) {
+          var sugs,
+              postfixList,
+              i;
+
+          postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+          sugs = "";
+          for (i = 0; i < postfixList.length; i++) {
+              sugs += "<li>" + input + postfixList[i] +"</li>";
+          }
+          return sugs;
+      }
+
+      // 将提示内容添加到email-sug-wrapper中
+      function addSugWrapper(sugHTML) {
+          var wrapper;
+
+          wrapper = document.querySelector("ul#email-sug-wrapper");
+          wrapper.innerHTML = sugHTML;
+      }
+
+      // 控制提示框的显示/隐藏状态
+      function toggleSugBox(input) {
+          if (!input) {
+              hideSugBox();
+          } else {
+              showSugBox();
+          }
+      }
+
+      // 隐藏提示框
+      function hideSugBox() {
+          var wrapper;
+
+          wrapper = document.querySelector("ul#email-sug-wrapper");
+          // wrapper.setAttribute("style", "display: none");
+          wrapper.style.display = "none";
+      }
+
+      // 显示提示框
+      function showSugBox() {
+          var wrapper;
+
+          wrapper = document.querySelector("ul#email-sug-wrapper");
+          // wrapper.removeAttribute("style");
+          wrapper.style.display = "";
+      }
+  </script>
+</body>
+</html>
