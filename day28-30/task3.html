@@ -35,15 +35,49 @@
       // 生成提示框中的提示内容
       function generateSugs(input) {
           var sugs,
+              sugsOfAllFixs,
+              prefix,
+              postfix,
               postfixList,
-              i;
+              matchRes,
+              i,
+              j;
 
+          prefix = input;
+          j = prefix.indexOf("@");
+          if (j !== -1) {
+              prefix = input.slice(0, j);
+              postfix = input.slice(j+1);
+          }
           postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+          matchRes = postfixList.map(function(item, index, array) {
+              return item.indexOf(postfix);
+          });
           sugs = "";
-          for (i = 0; i < postfixList.length; i++) {
-              sugs += "<li>" + input + "@" + postfixList[i] +"</li>";
+          sugsOfAllFixs = "";
+          for (i = 0, j = 0; i < matchRes.length; i++) {
+              sugsOfAllFixs += "<li>" + prefix + "@" + postfixList[i] +"</li>";
+              if (matchRes[i] === 0) {
+                  sugs += "<li>" + prefix + "@" + postfixList[i] +"</li>";
+              }
+              if (matchRes[i] === -1) {
+                  j++;
+              }
+          }
+          if (postfix && j === matchRes.length) {
+              return sugsOfAllFixs;
           }
           return sugs;
+/*
+          // 一开始都不匹配，全部显示，随着用户的输入，匹配越来越少，直到没有，认为更合理，保留意见
+          for (i = 0; i < postfixList.length; i++) {
+              j = postfixList[i].indexOf(postfix);
+              if (!postfix || j === 0) {
+                  sugs += "<li>" + prefix + "@" + postfixList[i] +"</li>";
+              }
+          }
+          return sugs;
+*/
       }
 
       // 将提示内容添加到email-sug-wrapper中

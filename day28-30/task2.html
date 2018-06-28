@@ -35,13 +35,19 @@
       // 生成提示框中的提示内容
       function generateSugs(input) {
           var sugs,
+              valid,
               postfixList,
               i;
 
+          valid = input;
+          i = input.indexOf("@");
+          if (i !== -1) {
+              valid = input.slice(0, i);
+          }
           postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
           sugs = "";
           for (i = 0; i < postfixList.length; i++) {
-              sugs += "<li>" + input + "@" + postfixList[i] +"</li>";
+              sugs += "<li>" + valid + "@" + postfixList[i] +"</li>";
           }
           return sugs;
       }
