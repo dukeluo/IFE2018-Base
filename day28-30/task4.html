@@ -5,6 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Day28-30</title>
+  <style>
+    .wrapper {
+      position: relative;
+      width: 960px;
+      margin: 100px auto;
+    }
+
+    #email-input {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 40%;
+      border: 1px solid #ccc;
+      padding: 0;
+      padding-left: 8px;
+      width: 300px;
+      height: 30px;
+      font-size: 16px;
+    }
+
+    #email-sug-wrapper {
+      position: absolute;
+      top: 30px;
+      left: 40%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #email-sug-wrapper > li {
+      list-style: none;
+      border: 1px solid #ccc;
+      border-top: none;
+      width: 300px;
+      height: 30px;
+      padding-left: 8px;
+      overflow: hidden;
+      font-size: 16px;
+      line-height: 30px;
+    }
+
+    #email-sug-wrapper > li:hover {
+      background-color: pink;
+    }
+  </style>
 </head>
 <body>
   <div class="wrapper">
@@ -25,6 +69,7 @@
           sugHTML = generateSugs(input);
           addSugWrapper(sugHTML);
           toggleSugBox(input);
+          pickSug();
       }
 
       // 获取用户输入
@@ -68,16 +113,6 @@
               return sugsOfAllFixs;
           }
           return sugs;
-/*
-          // 认为更合理，保留意见
-          for (i = 0; i < postfixList.length; i++) {
-              j = postfixList[i].indexOf(postfix);
-              if (!postfix || j === 0) {
-                  sugs += "<li>" + prefix + "@" + postfixList[i] +"</li>";
-              }
-          }
-          return sugs;
-*/
       }
 
       // 将提示内容添加到email-sug-wrapper中
@@ -113,6 +148,24 @@
           wrapper = document.querySelector("ul#email-sug-wrapper");
           // wrapper.removeAttribute("style");
           wrapper.style.display = "";
+      }
+
+      // 选择某项提示
+      function pickSug() {
+          var ul,
+              input,
+              sug,
+              i;
+
+          ul = document.querySelector("#email-sug-wrapper");
+          input = document.querySelector("#email-input");
+          ul.onclick = function(event) {
+              if (event.target.nodeName.toLowerCase() === "li") {
+                  sug = event.target.innerHTML;
+                  input.value = sug;
+                  hideSugBox();
+              }
+          }
       }
   </script>
 </body>
