@@ -48,6 +48,10 @@
     #email-sug-wrapper > li:hover {
       background-color: pink;
     }
+
+    .selected {
+        background-color: lime;
+    }
   </style>
 </head>
 <body>
@@ -57,20 +61,84 @@
   </div>
 
   <script type="text/javascript">
-      // 邮箱后缀List参考
       var emailInput;
 
       emailInput = document.querySelector("input#email-input");
-      emailInput.oninput = function(event) {
-          var input,
-              sugHTML;
+      emailInput.addEventListener("input", function(event) {
+          var inputText,
+              sugHTML,
 
-          input = getInput();
-          sugHTML = generateSugs(input);
+          inputText = getInput();
+          sugHTML = generateSugs(inputText);
           addSugWrapper(sugHTML);
-          toggleSugBox(input);
-          pickSug();
-      }
+          LiUnit.allItems = document.querySelectorAll("#email-sug-wrapper > li");
+          LiUnit.length = LiUnit.allItems.length;
+          LiUnit.resetSelected();
+          // 添加三个特殊的键盘处理事件
+          emailInput.onkeyup = function(event) {
+              var pressKeyCode,
+                  i;
+
+              pressKeyCode = event.keyCode;
+              if (pressKeyCode === 13 || pressKeyCode === 38 || pressKeyCode === 40) {
+                  i = LiUnit.getSelectedItemNo();
+                  if (pressKeyCode === 38) {
+                      LiUnit.clearSelectedItem();
+                      i !== 0 ? LiUnit.setSelectedItem(i-1) : LiUnit.setSelectedItem(LiUnit.length-1);
+                  } else if (pressKeyCode === 40) {
+                      LiUnit.clearSelectedItem();
+                      i !== LiUnit.length-1 ? LiUnit.setSelectedItem(i+1) : LiUnit.setSelectedItem(0);
+                  } else {
+                      emailInput.value = HTMLDecode(LiUnit.allItems[i].innerHTML);
+                      hideSugBox();
+                  }
+              } else {
+                  pickSug();
+              }
+          };
+          toggleSugBox(inputText);
+      }, false);
+
+      // 所有自动生成的li对象
+      var LiUnit;
+      LiUnit = {
+          allItems: null,
+          length: 0,
+          getSelectedItemNo: function() {
+              var i;
+
+              for (i = 0; i < this.length; i++) {
+                  if (this.allItems[i].getAttribute("class") === "selected") {
+                      break;
+                  }
+              }
+              return i === this.length ? -1 : i;
+          },
+          clearSelectedItem: function() {
+              var i;
+
+              i = this.getSelectedItemNo();
+              if (i !== -1) {
+                  this.allItems[i].removeAttribute("class");
+              }
+          },
+          setSelectedItem: function(i) {
+              if (i >= 0 && i < this.length) {
+                  this.allItems[i].setAttribute("class", "selected");
+              }
+          },
+          resetSelected: function() {
+              var i;
+
+              i = this.getSelectedItemNo();
+              if (i !== 0) {
+                  if (i !== -1) {
+                      this.clearSelectedItem(i);
+                  }
+                  this.setSelectedItem(0);
+              }
+          }
+      };
 
       // 获取用户输入
       function getInput() {
@@ -78,7 +146,7 @@
       }
 
       // 生成提示框中的提示内容
-      function generateSugs(input) {
+      function generateSugs(inputText) {
           var sugs,
               sugsOfAllFixs,
               prefix,
@@ -88,11 +156,11 @@
               i,
               j;
 
-          prefix = input;
+          prefix = inputText;
           j = prefix.indexOf("@");
           if (j !== -1) {
-              prefix = input.slice(0, j);
-              postfix = input.slice(j+1);
+              prefix = inputText.slice(0, j);
+              postfix = inputText.slice(j+1);
           }
           postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
           matchRes = postfixList.map(function(item, index, array) {
@@ -124,8 +192,8 @@
       }
 
       // 控制提示框的显示/隐藏状态
-      function toggleSugBox(input) {
-          if (!input) {
+      function toggleSugBox(inputText) {
+          if (!inputText) {
               hideSugBox();
           } else {
               showSugBox();
@@ -137,7 +205,6 @@
           var wrapper;
 
           wrapper = document.querySelector("ul#email-sug-wrapper");
-          // wrapper.setAttribute("style", "display: none");
           wrapper.style.display = "none";
       }
 
@@ -146,23 +213,20 @@
           var wrapper;
 
           wrapper = document.querySelector("ul#email-sug-wrapper");
-          // wrapper.removeAttribute("style");
           wrapper.style.display = "";
       }
 
       // 选择某项提示
       function pickSug() {
           var ul,
-              input,
               sug,
               i;
 
           ul = document.querySelector("#email-sug-wrapper");
-          input = document.querySelector("#email-input");
           ul.onclick = function(event) {
               if (event.target.nodeName.toLowerCase() === "li") {
                   sug = event.target.innerHTML;
-                  input.value = HTMLDecode(sug);
+                  emailInput.value = HTMLDecode(sug);
                   hideSugBox();
               }
           }
