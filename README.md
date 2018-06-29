@@ -11,7 +11,8 @@
 | [Day19 找到那个DOM](http://ife.baidu.com/course/detail/id/47)                        | [代码](day19)              | [笔记](day19/note.md)     | 预览                                                                         |
 | [Day20-21 让你和页面对话](http://ife.baidu.com/course/detail/id/49)                   | [代码](day20-21)           | [笔记](day20-21/note.md)  | [预览](https://rawgit.com/DukeLuo/IFE2018-Base/master/day20-21/task6.html)   |
 | [Day22-24 JavaScript里面的居民们](http://ife.baidu.com/course/detail/id/50)           | [代码](day22-24)           | [笔记](day22-24/note.md)  | 预览                                                                         |
-| [Day25-27 倒数开始 滴答滴 滴答滴](http://ife.baidu.com/course/detail/id/51)            | [代码](day25-27)           | [笔记](day25-27/note.md)  | [预览](https://rawgit.com/DukeLuo/IFE2018-Base/master/day25-27/task3.html)    |
+| [Day25-27 倒数开始 滴答滴 滴答滴](http://ife.baidu.com/course/detail/id/51)            | [代码](day25-27)           | [笔记](day25-27/note.md)  | [预览](https://rawgit.com/DukeLuo/IFE2018-Base/master/day25-27/task3.html)   |
+| [Day28-30 给爱的人发个邮件吧](http://ife.baidu.com/course/detail/id/52)                | [代码](day28-30)          | [笔记](day28-30/note.md)  | [预览](https://rawgit.com/DukeLuo/IFE2018-Base/master/day28-30/task6.html)    |
 
 
 **博客：[DukeLuo's Blog](https://dukeluo.me)**
