@@ -81,7 +81,7 @@
                   i;
 
               pressKeyCode = event.keyCode;
-              if (pressKeyCode === 13 || pressKeyCode === 38 || pressKeyCode === 40) {
+              if (pressKeyCode === 13 || pressKeyCode === 38 || pressKeyCode === 40 || pressKeyCode === 27) {
                   i = LiUnit.getSelectedItemNo();
                   if (pressKeyCode === 38) {
                       LiUnit.clearSelectedItem();
@@ -89,9 +89,12 @@
                   } else if (pressKeyCode === 40) {
                       LiUnit.clearSelectedItem();
                       i !== LiUnit.length-1 ? LiUnit.setSelectedItem(i+1) : LiUnit.setSelectedItem(0);
-                  } else {
+                  } else if (pressKeyCode === 13) {
                       emailInput.value = HTMLDecode(LiUnit.allItems[i].innerHTML);
                       hideSugBox();
+                  } else {
+                      // 全选用户输入
+                      emailInput.select();
                   }
               } else {
                   pickSug();
@@ -99,6 +102,11 @@
           };
           toggleSugBox(inputText);
       }, false);
+
+      // 页面加载完成输入框获得焦点
+      window.addEventListener("load", function(event) {
+          emailInput.focus();
+      });
 
       // 所有自动生成的li对象
       var LiUnit;
@@ -228,6 +236,8 @@
               if (event.target.nodeName.toLowerCase() === "li") {
                   sug = event.target.innerHTML;
                   emailInput.value = HTMLDecode(sug);
+                  // 输入框保持焦点
+                  emailInput.focus();
                   hideSugBox();
               }
           }
