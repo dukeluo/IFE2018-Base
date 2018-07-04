@@ -5,34 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Day31-33</title>
+  <script type="text/javascript" src="ife31data.js"></script>
 </head>
 <body>
   <select id="region-select" name="region">
-    <option value="east-china">华东</option>
-    <option value="south-china">华南</option>
-    <option value="north-china">华北</option>
+    <option value="华东">华东</option>
+    <option value="华南">华南</option>
+    <option value="华北">华北</option>
   </select>
-  
+
 <!--
   <div id="region-select">
     <section>
-      <input type="radio" name="region" id="region1" value="east-china" />
+      <input type="radio" name="region" id="region1" value="华东" />
       <label for="region1">华东</label>
     </section>
 
     <section>
-      <input type="radio" name="region" id="region2" value="south-china" />
+      <input type="radio" name="region" id="region2" value="华南" />
       <label for="region2">华南</label>
     </section>
 
     <section>
-      <input type="radio" name="region" id="region3" value="north-china" />
+      <input type="radio" name="region" id="region3" value="华北" />
       <label for="region3">华北</label>
     </section>
   </div>
 -->
-
   <div id="table-wrapper">
   </div>
+
+  <script type="text/javascript">
+  /*
+  region-select的change事件 = function() {
+      渲染新的表格(根据select选项获取数据)
+  }
+
+  function 渲染新的表格(data) {
+    输出表头：商品、地区、1月、2月、…… 12月
+    遍历数据 {
+      输出每一行的表格HTML内容
+    }
+    把生成的HTML内容赋给table-wrapper
+  }
+  */
+      function getSelectedRegionData() {
+          var region,
+              index,
+              i;
+
+          index = document.querySelector("#region-select").selectedIndex;
+          region = document.querySelector("#region-select").options[index].value;
+          return sourceData.filter(function (item, index, array) {
+              return item.region === region;
+          });
+      }
+
+
+
+  </script>
 </body>
 </html>
