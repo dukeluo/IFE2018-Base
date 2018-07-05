@@ -13,42 +13,43 @@
     <option value="华南">华南</option>
     <option value="华北">华北</option>
   </select>
+  <select id="product-select" name="product">
+    <option value="手机">手机</option>
+    <option value="笔记本">笔记本</option>
+    <option value="智能音箱">智能音箱</option>
+  </select>
 
-<!--
-  <div id="region-select">
-    <section>
-      <input type="radio" name="region" id="region1" value="华东" />
-      <label for="region1">华东</label>
-    </section>
-
-    <section>
-      <input type="radio" name="region" id="region2" value="华南" />
-      <label for="region2">华南</label>
-    </section>
-
-    <section>
-      <input type="radio" name="region" id="region3" value="华北" />
-      <label for="region3">华北</label>
-    </section>
-  </div>
--->
   <div id="table-wrapper">
   </div>
 
   <script type="text/javascript">
       document.querySelector("#region-select").onchange = function(event) {
-          createForm(getSelectedRegionData());
+          createForm(getSelectedData());
+      }
+      document.querySelector("#product-select").onchange = function(event) {
+          createForm(getSelectedData());
       }
 
-      function getSelectedRegionData() {
-          var region,
-              index;
+      function getSelectedData() {
+          var actions,
+              data,
+              i;
 
-          index = document.querySelector("#region-select").selectedIndex;
-          region = document.querySelector("#region-select").options[index].value;
-          return sourceData.filter(function (item, index, array) {
-              return item.region === region;
-          });
+          data = sourceData;
+          actions = getAction();
+          for (i = 0; i < actions.length; i++) {
+              if (actions[i] === "region") {
+                  data = data.filter(function (item, index, array) {
+                      return item.region === getSelectValue("region-select");
+                  });
+              }
+              if (actions[i] === "product") {
+                  data = data.filter(function (item, index, array) {
+                      return item.product === getSelectValue("product-select");
+                  });
+              }
+          }
+          return data;
       }
 
       function createForm(data) {
@@ -73,6 +74,29 @@
               tableHTML += row;
           }
           document.querySelector("#table-wrapper").innerHTML = tableHTML;
+      }
+
+      function getAction() {
+          var actions,
+              selects,
+              i;
+
+          actions = [];
+          selects = document.querySelectorAll("select");
+          for (i = 0; i < selects.length; i++) {
+              actions.push(selects[i].name);
+          }
+          return actions;
+      }
+
+      function getSelectValue(id) {
+          var select,
+              index;
+
+          id = "#" + id;
+          select = document.querySelector(id);
+          index = select.selectedIndex;
+          return select.options[index].value;
       }
 
       function flatten2d(a) {
