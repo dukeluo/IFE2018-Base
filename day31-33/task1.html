@@ -36,19 +36,10 @@
   </div>
 
   <script type="text/javascript">
-  /*
-  region-select的change事件 = function() {
-      渲染新的表格(根据select选项获取数据)
-  }
+      document.querySelector("#region-select").onchange = function(event) {
+          createForm(getSelectedRegionData());
+      }
 
-  function 渲染新的表格(data) {
-    输出表头：商品、地区、1月、2月、…… 12月
-    遍历数据 {
-      输出每一行的表格HTML内容
-    }
-    把生成的HTML内容赋给table-wrapper
-  }
-  */
       function getSelectedRegionData() {
           var region,
               index,
@@ -61,8 +52,40 @@
           });
       }
 
+      function createForm(data) {
+          var tableHTML,
+              row,
+              vals,
+              i,
+              j;
 
+          tableHTML = '';
+          tableHTML += '<table border="1" cellspacing="0" bordercolor="#000" width = "80%" style="border-collapse:collapse;text-align:center;">';
+          tableHTML += '<tr><th>商品</th><th>地区</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th>';
+          tableHTML += '<th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th></tr>';
+          for (i = 0; i < data.length; i++) {
+              row = '<tr>';
+              vals = [];
+              vals = flatten2d(Object.values(data[i]));
+              for (j = 0; j < vals.length; j++) {
+                  row += '<td>' + vals[j] + '</td>';
+              }
+              row += '</tr>';
+              tableHTML += row;
+          }
+          document.querySelector("#table-wrapper").innerHTML = tableHTML;
+      }
 
+      function flatten2d(a) {
+          var res,
+              i;
+
+          res = [];
+          for (i = 0; i < a.length; i++) {
+              res = res.concat(a[i]);
+          }
+          return res;
+      }
   </script>
 </body>
 </html>
