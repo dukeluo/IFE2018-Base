@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day31-33</title>
+  <script type="text/javascript" src="ife31data.js"></script>
+</head>
+<body>
+  <div id="region-radio-wrapper"></div>
+  <div id="product-radio-wrapper"></div>
+  <div id="table-wrapper"></div>
+
+
+  <script type="text/javascript">
+      /**
+       * @param  {string} wrapperId
+       * @param  {Array} configInfo    a array of config Object
+       * @return {void}
+       */
+      function createCheckBox(wrapperId, configInfo) {
+          var checkBoxHTML,
+              wrapper,
+              i;
+          // check the configInfo
+          checkBoxHTML = '';
+          checkBoxHTML += '<section><input type="checkbox" id="select-all" name= ' + configInfo[0].name + ' value="select-all" checkbox-type="all">';
+          checkBoxHTML += '<label for="select-all">全选</label></section>';
+          for (i = 0; i < configInfo.length; i++) {
+              checkBoxHTML += '<section><input type="checkbox" id= ' + configInfo[i].id + ' name= ' + configInfo[i].name + ' value= ' + configInfo[i].value + ' checkbox-type="single">';
+              checkBoxHTML += '<label for=' + configInfo[i].value + '>' + configInfo[i].text + '</label></section>';
+          }
+          wrapper = document.querySelector("#"+wrapperId);
+          wrapper.innerHTML = checkBoxHTML;
+          wrapper.onclick = function (event) {
+              var targetElement,
+                  selectAllCheckbox,
+                  singleCheckboxsArray,
+                  alreadySelectedCheckboxsArray,
+                  i;
+
+              targetElement = event.target;
+              selectAllCheckbox = document.querySelector("#"+wrapperId+" input[checkbox-type='all']");
+              singleCheckboxsArray = Array.apply(null, document.querySelectorAll("#"+wrapperId+" input[checkbox-type='single']"));
+              alreadySelectedCheckboxsArray = singleCheckboxsArray.filter(function (item, index, array) {
+                return item.checked === true;
+              });
+              if (targetElement.nodeName.toLowerCase() === "input") {
+                  if (targetElement === selectAllCheckbox) {
+                      if (alreadySelectedCheckboxsArray.length === singleCheckboxsArray.length) {
+                          event.preventDefault();
+                      }
+                      singleCheckboxsArray.forEach(function (item, index, array) {
+                          item.checked = true;
+                      });
+                  } else {
+                      if (alreadySelectedCheckboxsArray.length === 0) {
+                          event.preventDefault();
+                      } else if (alreadySelectedCheckboxsArray.length === singleCheckboxsArray.length) {
+                          selectAllCheckbox.checked = true;
+                      } else {
+                          selectAllCheckbox.checked = false;
+                      }
+                  }
+              }
+          }
+      }
+
+      createCheckBox("region-radio-wrapper", [{
+          id: 1,
+          name: "wit",
+          value: 1,
+          text: "XXXX"
+      }, {
+          id: 2,
+          name: "wit",
+          value: 2,
+          text: "YYYY"
+      }]);
+
+
+/*
+  function 生成一组CheckBox( CheckBox容器, CheckBox选项的参数对象或者数组 ) {
+      生成全选checkbox的html，给一个自定义属性表示为全选checkbox，比如checkbox-type="all"
+      遍历参数对象 {
+          生成各个子选项checkbox的html，给一个自定义属性表示为子选项
+      }
+      容器innerHTML = 生成好的html集合
+
+      给容器做一个事件委托 = function() {
+          if 是checkbox
+              读取自定义属性
+              if 全选
+                  做全选对应的逻辑
+              else
+                  做子选项对应的逻辑
+      }
+  }
+  */
+      function getSelectedData() {
+          var actions,
+              data,
+              i;
+
+          data = sourceData;
+          actions = getAction();
+          for (i = 0; i < actions.length; i++) {
+              if (actions[i] === "region") {
+                  data = data.filter(function (item, index, array) {
+                      return item.region === getSelectValue("region-select");
+                  });
+              }
+              if (actions[i] === "product") {
+                  data = data.filter(function (item, index, array) {
+                      return item.product === getSelectValue("product-select");
+                  });
+              }
+          }
+          return data;
+      }
+
+      function createForm(data) {
+          var tableHTML,
+              row,
+              vals,
+              i,
+              j;
+
+          tableHTML = '';
+          tableHTML += '<table border="1" cellspacing="0" bordercolor="#000" width = "80%" style="border-collapse:collapse;text-align:center;">';
+          tableHTML += '<tr><th>商品</th><th>地区</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th>';
+          tableHTML += '<th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th></tr>';
+          for (i = 0; i < data.length; i++) {
+              row = '<tr>';
+              vals = [];
+              vals = flatten2d(Object.values(data[i]));
+              for (j = 0; j < vals.length; j++) {
+                  row += '<td>' + vals[j] + '</td>';
+              }
+              row += '</tr>';
+              tableHTML += row;
+          }
+          document.querySelector("#table-wrapper").innerHTML = tableHTML;
+      }
+
+      function getAction() {
+          var actions,
+              selects,
+              i;
+
+          actions = [];
+          selects = document.querySelectorAll("select");
+          for (i = 0; i < selects.length; i++) {
+              actions.push(selects[i].name);
+          }
+          return actions;
+      }
+
+      function getSelectValue(id) {
+          var select,
+              index;
+
+          id = "#" + id;
+          select = document.querySelector(id);
+          index = select.selectedIndex;
+          return select.options[index].value;
+      }
+
+      function flatten2d(a) {
+          var res,
+              i;
+
+          res = [];
+          for (i = 0; i < a.length; i++) {
+              res = res.concat(a[i]);
+          }
+          return res;
+      }
+  </script>
+</body>
+</html>
