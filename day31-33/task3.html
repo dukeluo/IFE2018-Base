@@ -5,15 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Day31-33</title>
+  <link rel="stylesheet" href="css/main.css">
   <script type="text/javascript" src="ife31data.js"></script>
 </head>
 <body>
-  <div id="region-radio-wrapper"></div>
-  <div id="product-radio-wrapper"></div>
+  <div id="radio-wrapper">
+    <div id="region-radio-wrapper"></div>
+    <div id="product-radio-wrapper"></div>
+  </div>
   <div id="table-wrapper"></div>
 
-
   <script type="text/javascript">
+      document.querySelector("#radio-wrapper").onclick = function(event) {
+          if (event.target.nodeName.toLowerCase() === "input") {
+              var selectedRegionNum,
+                  selectedProductNum,
+                  table,
+                  i;
+
+              createForm(getData());
+              table = document.querySelector("#table-wrapper table");
+              selectedRegionNum = getCheckboxValue("region-radio-wrapper").length;
+              selectedProductNum = getCheckboxValue("product-radio-wrapper").length;
+              if (selectedRegionNum === 1 && selectedProductNum !== 1) {
+                  for (i = 0; i < table.rows.length; i++) {
+                      exchCellValueOfOneRow(table, i, 0, 1);
+                  }
+              }
+              autoRowSpan(table, 1, 0);
+          }
+      }
+
+      createCheckBox("region-radio-wrapper", [{
+          id: "华东",
+          name: "region",
+          value: "华东",
+          text: "华东"
+      }, {
+          id: "华南",
+          name: "region",
+          value: "华南",
+          text: "华南"
+      }, {
+          id: "华北",
+          name: "region",
+          value: "华北",
+          text: "华北"
+
+      }]);
+
+      createCheckBox("product-radio-wrapper", [{
+          id: "手机",
+          name: "product",
+          value: "手机",
+          text: "手机"
+      }, {
+          id: "笔记本",
+          name: "product",
+          value: "笔记本",
+          text: "笔记本"
+      }, {
+          id: "智能音箱",
+          name: "region",
+          value: "智能音箱",
+          text: "智能音箱"
+      }]);
+
       /**
        * @param  {string} wrapperId
        * @param  {Array} configInfo    a array of config Object
@@ -22,12 +79,18 @@
       function createCheckBox(wrapperId, configInfo) {
           var checkBoxHTML,
               wrapper,
+              keys,
               i;
-          // check the configInfo
+
           checkBoxHTML = '';
           checkBoxHTML += '<section><input type="checkbox" id="select-all" name= ' + configInfo[0].name + ' value="select-all" checkbox-type="all">';
           checkBoxHTML += '<label for="select-all">全选</label></section>';
           for (i = 0; i < configInfo.length; i++) {
+              keys = Object.keys(configInfo[i]);
+              if (keys.indexOf("id") === -1 || keys.indexOf("name") === -1 || keys.indexOf("value") === -1 || keys.indexOf("text") === -1) {
+                  console.log("WARNING! Wrong Config!");
+                  return ;
+              }
               checkBoxHTML += '<section><input type="checkbox" id= ' + configInfo[i].id + ' name= ' + configInfo[i].name + ' value= ' + configInfo[i].value + ' checkbox-type="single">';
               checkBoxHTML += '<label for=' + configInfo[i].value + '>' + configInfo[i].text + '</label></section>';
           }
@@ -57,6 +120,7 @@
                   } else {
                       if (alreadySelectedCheckboxsArray.length === 0) {
                           event.preventDefault();
+                          targetElement.checked = true;
                       } else if (alreadySelectedCheckboxsArray.length === singleCheckboxsArray.length) {
                           selectAllCheckbox.checked = true;
                       } else {
@@ -66,58 +130,8 @@
               }
           }
       }
-
-      createCheckBox("region-radio-wrapper", [{
-          id: 1,
-          name: "wit",
-          value: 1,
-          text: "XXXX"
-      }, {
-          id: 2,
-          name: "wit",
-          value: 2,
-          text: "YYYY"
-      }]);
-
-
-/*
-  function 生成一组CheckBox( CheckBox容器, CheckBox选项的参数对象或者数组 ) {
-      生成全选checkbox的html，给一个自定义属性表示为全选checkbox，比如checkbox-type="all"
-      遍历参数对象 {
-          生成各个子选项checkbox的html，给一个自定义属性表示为子选项
-      }
-      容器innerHTML = 生成好的html集合
-
-      给容器做一个事件委托 = function() {
-          if 是checkbox
-              读取自定义属性
-              if 全选
-                  做全选对应的逻辑
-              else
-                  做子选项对应的逻辑
-      }
-  }
-  */
-      function getSelectedData() {
-          var actions,
-              data,
-              i;
-
-          data = sourceData;
-          actions = getAction();
-          for (i = 0; i < actions.length; i++) {
-              if (actions[i] === "region") {
-                  data = data.filter(function (item, index, array) {
-                      return item.region === getSelectValue("region-select");
-                  });
-              }
-              if (actions[i] === "product") {
-                  data = data.filter(function (item, index, array) {
-                      return item.product === getSelectValue("product-select");
-                  });
-              }
-          }
-          return data;
+      function hansSortByAccent(a, b) {
+          return a.localeCompare(b, 'zh-Hans-CN', {sensitivity: 'accent'});
       }
 
       function createForm(data) {
@@ -127,6 +141,16 @@
               i,
               j;
 
+
+          data = data.sort(function (a, b) {
+              var t;
+
+              t = hansSortByAccent(a.product, b.product);
+              if (!t) {
+                  return hansSortByAccent(a.region, b.region);
+              }
+              return t;
+          });
           tableHTML = '';
           tableHTML += '<table border="1" cellspacing="0" bordercolor="#000" width = "80%" style="border-collapse:collapse;text-align:center;">';
           tableHTML += '<tr><th>商品</th><th>地区</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th>';
@@ -141,30 +165,89 @@
               row += '</tr>';
               tableHTML += row;
           }
+          tableHTML += '</table>';
           document.querySelector("#table-wrapper").innerHTML = tableHTML;
       }
 
-      function getAction() {
-          var actions,
-              selects,
+      function autoRowSpan(tb, row, col) {
+          var lastValue,
+              currValue,
+              count,
               i;
 
-          actions = [];
-          selects = document.querySelectorAll("select");
-          for (i = 0; i < selects.length; i++) {
-              actions.push(selects[i].name);
+          lastValue = "";
+          currValue = "";
+          count = 0;
+          for (i = row; i < tb.rows.length; i++) {
+              currValue = tb.rows[i].cells[col].innerHTML;
+              if (currValue === lastValue) {
+                  tb.rows[i].deleteCell(col);
+                  tb.rows[i-row-count].cells[col].rowSpan = row + count + 1;
+                  count++;
+              } else {
+                  lastValue = currValue;
+                  count = 0;
+              }
           }
-          return actions;
       }
 
-      function getSelectValue(id) {
-          var select,
-              index;
+      function exchCellValueOfOneRow(tb, row, col1, col2) {
+          var t;
 
-          id = "#" + id;
-          select = document.querySelector(id);
-          index = select.selectedIndex;
-          return select.options[index].value;
+          t = tb.rows[row].cells[col1].innerHTML;
+          tb.rows[row].cells[col1].innerHTML = tb.rows[row].cells[col2].innerHTML;
+          tb.rows[row].cells[col2].innerHTML = t;
+      }
+
+      var CHECKBOXSET_IDS = ["region-radio-wrapper", "product-radio-wrapper"];
+
+      function getData() {
+          var data,
+              checkboxValue,
+              i,
+              j;
+
+          data = sourceData;
+          for (i = 0; i < CHECKBOXSET_IDS.length; i++) {
+              checkboxValue = getCheckboxValue(CHECKBOXSET_IDS[i]);
+              if (CHECKBOXSET_IDS[i] === "region-radio-wrapper") {
+                  data = data.filter(function (item, index, array) {
+                      for (j = 0; j < checkboxValue.length; j++) {
+                          if (item.region === checkboxValue[j]) {
+                              return true;
+                          }
+                      }
+                      return false;
+                  });
+              }
+              if (CHECKBOXSET_IDS[i] === "product-radio-wrapper") {
+                  data = data.filter(function (item, index, array) {
+                      for (j = 0; j < checkboxValue.length; j++) {
+                          if (item.product === checkboxValue[j]) {
+                              return true;
+                          }
+                      }
+                      return false;
+                  });
+              }
+          }
+          return data;
+      }
+
+      function getCheckboxValue(id) {
+          var checkboxs,
+              res,
+              i;
+
+          res = [];
+          id = "#" + id + " input[checkbox-type='single']";
+          checkboxs = document.querySelectorAll(id);
+          for (i = 0; i < checkboxs.length; i++) {
+              if (checkboxs[i].checked) {
+                  res.push(checkboxs[i].value);
+              }
+          }
+          return res;
       }
 
       function flatten2d(a) {

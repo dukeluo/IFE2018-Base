@@ -1,0 +1,10 @@
+#radio-wrapper {
+  overflow: auto;
+}
+
+#region-radio-wrapper {
+  float: left;
+}
+#product-radio-wrapper {
+  float: left;
+}
