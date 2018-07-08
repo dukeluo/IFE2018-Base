@@ -13,6 +13,7 @@
 | [Day22-24 JavaScript里面的居民们](http://ife.baidu.com/course/detail/id/50)           | [代码](day22-24)           | [笔记](day22-24/note.md)  | 预览                                                                         |
 | [Day25-27 倒数开始 滴答滴 滴答滴](http://ife.baidu.com/course/detail/id/51)            | [代码](day25-27)           | [笔记](day25-27/note.md)  | [预览](https://rawgit.com/DukeLuo/IFE2018-Base/master/day25-27/task3.html)   |
 | [Day28-30 给爱的人发个邮件吧](http://ife.baidu.com/course/detail/id/52)                | [代码](day28-30)          | [笔记](day28-30/note.md)  | [预览](https://rawgit.com/DukeLuo/IFE2018-Base/master/day28-30/task6.html)    |
+| [Day31-33 我是精明的小卖家（一）](http://ife.baidu.com/course/detail/id/53)            | [代码](day31-33)           | [笔记](day31-33/note.md)  | [预览](https://rawgit.com/DukeLuo/IFE2018-Base/master/day31-33/task3.html)    |
 
 
 **博客：[DukeLuo's Blog](https://dukeluo.me)**
