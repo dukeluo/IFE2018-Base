@@ -11,3 +11,5 @@ function flatten2d(a) {
     return res;
 }
       singleCheckboxsArray = Array.apply(null, document.querySelectorAll("#"+wrapperId+" input[checkbox-type='single']"));
+
+      ['张三','李四','王五'].sort((a, b) => a.localeCompare(b, 'zh-Hans-CN', {sensitivity: 'accent'}))
