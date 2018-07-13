@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Day34-36</title>
+</head>
+<body>
+  <canvas id="drawing" width="600" height="600">A drawing of something.</canvas>
+
+  <script type="text/javascript">
+      var drawing;
+      drawing = document.getElementById("drawing");
+
+      if (drawing.getContext) {
+          var context;
+
+          context = drawing.getContext("2d");
+          context.fillStyle = "#ccc";
+          context.strokeStyle = "#ccc";
+          context.lineWidth = "2";
+          // 绘制矩形
+          context.strokeRect(10, 10, 580, 60);
+          context.beginPath();
+          // 绘制直线
+          context.moveTo(10, 90);
+          context.lineTo(590, 90);
+          // 绘制圆形
+          context.moveTo(210, 150);
+          context.arc(160, 150, 50, 0, 2 * Math.PI, false);
+          // 绘制时钟
+          context.moveTo(500, 200);
+          context.arc(400, 200, 100,  0, 2 * Math.PI, false);
+          context.moveTo(490, 200);
+          context.arc(400, 200, 90,  0, 2 * Math.PI, false);
+          context.moveTo(400, 200);
+          context.lineTo(400, 120);
+          context.moveTo(400, 200);
+          context.lineTo(340, 200);
+          context.stroke();
+          // 绘制文字
+          context.font = "bold 40px Arial";
+          context.textAlign = "center";
+          context.textBaseline = "middle";
+          context.fillText("Hello World", 150, 250);
+      }
+  </script>
+</body>
+</html>
