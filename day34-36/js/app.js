@@ -57,3 +57,4 @@ document.querySelector("#radio-wrapper").onclick = function(event) {
 
 // 使用SVG绘制华东地区手机12个月数据直方图
 document.querySelector("#chart-using-svg").appendChild(drawHistogram(sourceData[0].sale));
+document.querySelector("#chart-using-canvas").appendChild(drawLinechart(sourceData[0].sale));
