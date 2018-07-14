@@ -56,5 +56,42 @@ document.querySelector("#radio-wrapper").onclick = function(event) {
 }
 
 // 使用SVG绘制华东地区手机12个月数据直方图
-document.querySelector("#chart-using-svg").appendChild(drawHistogram(sourceData[0].sale));
-document.querySelector("#chart-using-canvas").appendChild(drawLinechart(sourceData[0].sale));
+// document.querySelector("#chart-using-svg").appendChild(drawHistogram(sourceData[0].sale));
+
+// 使用canvas绘制华东地区手机12个月数据折线图
+// document.querySelector("#chart-using-canvas").appendChild(drawLinechart(sourceData[0].sale));
+
+// 为table添加事件，实时绘制直方图和折线图
+document.querySelector("#table-wrapper").onmouseover = function (event) {
+    if (event.target.nodeName.toLowerCase() === "td") {
+        var cells,
+            a,
+            i;
+
+        a = [];
+        cells = event.target.parentElement.cells;
+        for (i = 0; i < cells.length; i++) {
+           a.push(+cells[i].innerHTML);
+        }
+        a = a.filter(function (item, index, array) {
+            return item >= 0;
+        });
+
+        var wrapper;
+
+        // 绘制直方图
+        wrapper = document.querySelector("#chart-using-svg");
+        if (wrapper.firstChild) {
+            wrapper.removeChild(wrapper.firstChild);
+        }
+        histogram.wrapperId = "chart-using-svg";
+        histogram.set(a);
+        // 绘制折线图
+        wrapper = document.querySelector("#chart-using-canvas");
+        if (wrapper.firstChild) {
+            wrapper.removeChild(wrapper.firstChild);
+        }
+        lineChart.wrapperId = "chart-using-canvas";
+        lineChart.set(a);
+    }
+}
