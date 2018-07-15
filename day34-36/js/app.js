@@ -74,7 +74,7 @@ document.querySelector("#table-wrapper").onmouseover = function (event) {
            a.push(+cells[i].innerHTML);
         }
         a = a.filter(function (item, index, array) {
-            return item >= 0;
+            return !isNaN(item);
         });
 
         var wrapper;
@@ -93,5 +93,36 @@ document.querySelector("#table-wrapper").onmouseover = function (event) {
         }
         lineChart.wrapperId = "chart-using-canvas";
         lineChart.set(a);
+    }
+}
+
+document.querySelector("#table-wrapper").onmouseout = function (event) {
+    // if (event.target.nodeName.toLowerCase() !== "td"
+        // && event.target.nodeName.toLowerCase() !== "tr"
+        // && event.target.nodeName.toLowerCase() !== "th") {
+        // console.log("hello, world");
+    // }
+    var rowVals,
+        rowMaxVals;
+
+    rowVals = [];
+    rowMaxVals = [];
+    if (event.target.nodeName.toLowerCase() === "table") {
+        var tb,
+            i;
+
+        tb = event.target;
+        for (i = 1; i < tb.rows.length; i++) {
+            var cells;
+
+            cells = Array.prototype.map.call(tb.rows[i].cells, function (item, index, array) {
+                return +item.innerHTML;
+            });
+            cells = cells.filter(function (item, index, array) {
+                return !isNaN(item);
+            });
+            rowVals.push(cells);
+            rowMaxVals.push(Math.max.apply(null, cells));
+        }
     }
 }

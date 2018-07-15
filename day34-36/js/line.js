@@ -89,7 +89,33 @@ lineChart = {
     pointColor: "transparent",
     lineColor: "#37A2DA",
     strokeWidth: "2",
-    draw: function () {
+    chart: document.createElement("canvas"),
+    x0: 0,
+    y0: 0,
+    init: function () {
+        var xAxis,
+            yAxis,
+            context;
+
+        this.x0 = 10;
+        this.y0 = this.height - 10;
+        this.chart.setAttribute("width", this.width);
+        this.chart.setAttribute("height", this.height);
+        this.chart.innerHTML = "A drawing of a line chart.";
+        xAxis = this.width - this.initAxisSpace;
+        yAxis = this.height - this.initAxisSpace;
+        context = this.chart.getContext("2d");
+        context.strokeStyle = this.axisColor;
+        context.beginPath();
+        context.moveTo(x0, y0);
+        context.lineTo(x0, y0-yAxis);
+        context.moveTo(x0, y0);
+        context.lineTo(x0+xAxis, y0);
+        context.stroke();
+    }
+
+
+    init: function () {
         var xAxis,
             yAxis,
             pointSpace,
@@ -107,8 +133,8 @@ lineChart = {
         lineChart.innerHTML = "A drawing of a line chart.";
 
         var context,
-            x0,
-            y0;
+        x0,
+        y0;
 
         x0 = 10;
         y0 = this.height - 10;
@@ -120,6 +146,8 @@ lineChart = {
         context.moveTo(x0, y0);
         context.lineTo(x0+xAxis, y0);
         context.stroke();
+    },
+    drawSingle: function () {
 
         var i,
             x,
@@ -145,8 +173,19 @@ lineChart = {
         }
         return lineChart;
     },
-    set: function (a) {
-        this.data = a;
-        document.querySelector("#"+this.wrapperId).appendChild(this.draw());
+    // drawGroup: function ()
+    setSingle: function (data) {
+        this.data = data;
+        document.querySelector("#"+this.wrapperId).appendChild(this.drawSingle());
+    }
+    setGroup: function (arrayOfData, arrayOfColor) {
+        var i;
+
+        for (i = 0; i < arrayOfData.length; i++) {
+            this.data = arrayOfData[i];
+            this.lineColor = arrayOfColor[i];
+            this.drawSingle();
+        }
+
     }
 }
