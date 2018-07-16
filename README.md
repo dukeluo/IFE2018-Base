@@ -14,5 +14,6 @@
 | [Day25-27 倒数开始 滴答滴 滴答滴](http://ife.baidu.com/course/detail/id/51)            | [代码](day25-27)           | [笔记](day25-27/note.md)  | [预览](https://dukeluo.me/IFE2018-Base/day25-27/task3.html)   |
 | [Day28-30 给爱的人发个邮件吧](http://ife.baidu.com/course/detail/id/52)                | [代码](day28-30)          | [笔记](day28-30/note.md)  | [预览](https://dukeluo.me/IFE2018-Base/day28-30/task6.html)    |
 | [Day31-33 我是精明的小卖家（一）](http://ife.baidu.com/course/detail/id/53)            | [代码](day31-33)           | [笔记](day31-33/note.md)  | [预览](https://dukeluo.me/IFE2018-Base/day31-33/task3.html)    |
+| [Day34-36 我是精明的小卖家（二）](http://ife.baidu.com/course/detail/id/55)            | [代码](day34-36)           | [笔记](day34-36/note.md)  | [预览](https://dukeluo.me/IFE2018-Base/day34-36/index.html)    |
 
 **博客：[DukeLuo's Blog](https://dukeluo.me)**
