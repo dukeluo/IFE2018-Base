@@ -88,74 +88,120 @@ histogram = {
     axisColor: "#000",
     barColor: "#37A2DA",
     strokeWidth: "2",
-    draw: function () {
-        var xAxis,
-            yAxis,
-            barWidth,
+    chart: null,
+    x0: 0,
+    y0: 0,
+    xAxis: 0,
+    yAxis: 0,
+    barWidth: 0,
+    barSpace: 0,
+    pxDataRatio: 0,
+    initBarSpace: 10,
+    barNumOfOneGroup: 1,
+    init: function () {
+        this.x0 = 10;
+        this.y0 = this.height - 10;
+        this.xAxis = this.width - this.initAxisSpace;
+        this.yAxis = this.height - this.initAxisSpace;
+        this.chart = document.createElementNS(this.SVGNS, "svg");
+        this.chart.setAttribute("version", "1.1");
+        this.chart.setAttribute("baseProfile", "full");
+        this.chart.setAttribute("width", this.width);
+        this.chart.setAttribute("height", this.height);
+        this.chart.setAttribute("xmlns", this.SVGNS);
+
+        var line;
+
+        line = document.createElementNS(this.SVGNS, "line");
+        line.setAttribute("x1", this.x0);
+        line.setAttribute("x2", this.x0+this.xAxis);
+        line.setAttribute("y1", this.y0);
+        line.setAttribute("y2", this.y0);
+        line.setAttribute("stroke", this.axisColor);
+        line.setAttribute("fill", "transparent");
+        line.setAttribute("stroke-width", this.strokeWidth);
+        this.chart.appendChild(line);
+        line = document.createElementNS(this.SVGNS, "line");
+        line.setAttribute("x1", this.x0);
+        line.setAttribute("x2", this.x0);
+        line.setAttribute("y1", this.y0);
+        line.setAttribute("y2", this.y0-this.yAxis);
+        line.setAttribute("stroke", this.axisColor);
+        line.setAttribute("fill", "transparent");
+        line.setAttribute("stroke-width", this.strokeWidth);
+        this.chart.appendChild(line);
+    },
+    drawSingle: function () {
+        var barWidth,
             barSpace,
             pxDataRatio;
 
-        xAxis = this.width - this.initAxisSpace;
-        yAxis = this.height - this.initAxisSpace;
-        barWidth = parseInt(xAxis/this.data.length*0.8);
-        barSpace = parseInt(xAxis/this.data.length*0.2);
-        pxDataRatio = yAxis / Math.max.apply(null, this.data);
-
-        var histogram;
-
-        histogram = document.createElementNS(this.SVGNS, "svg");
-        histogram.setAttribute("version", "1.1");
-        histogram.setAttribute("baseProfile", "full");
-        histogram.setAttribute("width", this.width);
-        histogram.setAttribute("height", this.height);
-        histogram.setAttribute("xmlns", this.SVGNS);
-
-        var line,
-            x0,
-            y0;
-
-        x0 = 10;
-        y0 = this.height - 10;
-        line = document.createElementNS(this.SVGNS, "line");
-        line.setAttribute("x1", x0);
-        line.setAttribute("x2", x0+xAxis);
-        line.setAttribute("y1", y0);
-        line.setAttribute("y2", y0);
-        line.setAttribute("stroke", this.axisColor);
-        line.setAttribute("fill", "transparent");
-        line.setAttribute("stroke-width", this.strokeWidth);
-        histogram.appendChild(line);
-        line = document.createElementNS(this.SVGNS, "line");
-        line.setAttribute("x1", x0);
-        line.setAttribute("x2", x0);
-        line.setAttribute("y1", y0);
-        line.setAttribute("y2", y0-yAxis);
-        line.setAttribute("stroke", this.axisColor);
-        line.setAttribute("fill", "transparent");
-        line.setAttribute("stroke-width", this.strokeWidth);
-        histogram.appendChild(line);
+        barWidth = this.barWidth || parseInt(this.xAxis/this.data.length*0.8);
+        barSpace = this.barSpace || parseInt(this.xAxis/this.data.length*0.2);
+        pxDataRatio = this.pxDataRatio || this.yAxis/Math.max.apply(null, this.data);
 
         var rect,
-            xpos,
-            ypos,
+            x,
+            y,
             i;
 
-        for (xpos = 10 + barSpace/2, i = 0; i < this.data.length; i++, xpos += barSpace+barWidth) {
-            ypos = 10 + yAxis - this.data[i] * pxDataRatio;
+        for (x = this.initBarSpace + barSpace/2, i = 0; i < this.data.length; i++, x += barSpace+barWidth*this.barNumOfOneGroup) {
+            y = 10 + this.yAxis - this.data[i] * pxDataRatio;
             rect = document.createElementNS(this.SVGNS, "rect");
-            rect.setAttribute("x", xpos);
-            rect.setAttribute("y", ypos);
+            rect.setAttribute("x", x);
+            rect.setAttribute("y", y);
             rect.setAttribute("height", this.data[i]*pxDataRatio);
             rect.setAttribute("width", barWidth);
-            rect.setAttribute("stroke", this.barColor);
+            rect.setAttribute("stroke-width", 0);   // 坑，不为0,复杂很多
             rect.setAttribute("fill", this.barColor);
-            rect.setAttribute("stroke-width", this.strokeWidth);
-            histogram.appendChild(rect);
+            this.chart.appendChild(rect);
         }
-        return histogram;
     },
-    set: function (a) {
-        this.data = a;
-        document.querySelector("#"+this.wrapperId).appendChild(this.draw());
+    setSingle: function (data) {
+        this.init();
+        this.data = data;
+        this.drawSingle();
+        document.querySelector("#"+this.wrapperId).appendChild(this.chart);
+    },
+    setGroup: function (arrayOfData, arrayOfColor) {
+        var maxVal,
+            prevColor,
+            prevRatio,
+            prevSpace,
+            prevWidth,
+            prevInitBarWidth,
+            prevBarNumOfOneGroup;
+
+        maxVal = arrayOfData.map(function (item, index, array) {
+            return Math.max.apply(null, item);
+        });
+        prevColor = this.barColor;
+        prevWidth = this.barWidth;
+        prevSpace = this.barSpace;
+        prevRatio = this.pxDataRatio;
+        prevInitBarSpace = this.initBarSpace;
+        prevBarNumOfOneGroup = this.barNumOfOneGroup;
+
+        this.init();
+        this.barNumOfOneGroup = arrayOfData.length;
+        this.barWidth = parseInt(this.xAxis/arrayOfData[0].length*0.8/this.barNumOfOneGroup);     // 此处取整数造成小的合并并不等于大的宽度
+        this.barSpace = parseInt(this.xAxis/arrayOfData[0].length*0.2);
+        this.pxDataRatio = this.yAxis / Math.max.apply(null, maxVal);
+
+        var i;
+
+        for (i = 0; i < arrayOfData.length; i++) {
+            this.data = arrayOfData[i];
+            this.barColor = arrayOfColor[i];
+            this.initBarSpace = 10 + i*this.barWidth;
+            this.drawSingle();
+        }
+        document.querySelector("#"+this.wrapperId).appendChild(this.chart);
+        this.barColor = prevColor;
+        this.barWidth = prevWidth;
+        this.barSpace = prevSpace;
+        this.pxDataRatio = prevRatio;
+        this.initBarSpace = prevInitBarSpace;
+        this.barNumOfOneGroup = prevBarNumOfOneGroup;
     }
 }

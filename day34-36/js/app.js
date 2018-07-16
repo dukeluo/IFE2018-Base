@@ -85,7 +85,7 @@ document.querySelector("#table-wrapper").onmouseover = function (event) {
             wrapper.removeChild(wrapper.firstChild);
         }
         histogram.wrapperId = "chart-using-svg";
-        histogram.set(a);
+        histogram.setSingle(a);
         // 绘制折线图
         wrapper = document.querySelector("#chart-using-canvas");
         if (wrapper.firstChild) {
@@ -96,7 +96,7 @@ document.querySelector("#table-wrapper").onmouseover = function (event) {
     }
 }
 
-// 为table添加事件，绘制所有折线图
+// 为table添加事件，绘制所有折线图和折线图
 document.querySelector("#table-wrapper").onmouseout = function (event) {
     var rowVals,
         tb,
@@ -104,7 +104,7 @@ document.querySelector("#table-wrapper").onmouseout = function (event) {
         i;
 
     rowVals = [];
-    colors = ["#d93a49", "#f47920", "#ffd400", "#45b97c", "#009ad6", "#145b7d", "#6f60aa", "#80752c", "#87843b"];
+    colors = ["#d93a49", "#f47920", "#ffd400", "#45b97c", "#009ad6", "#145b7d", "#6f60aa", "#ef5b9c", "#87843b"];
     tb = document.querySelector("table");
     for (i = 1; i < tb.rows.length; i++) {
         var cells;
@@ -117,6 +117,14 @@ document.querySelector("#table-wrapper").onmouseout = function (event) {
         });
         rowVals.push(cells);
     }
+    // 绘制直方图
+    wrapper = document.querySelector("#chart-using-svg");
+    if (wrapper.firstChild) {
+        wrapper.removeChild(wrapper.firstChild);
+    }
+    histogram.wrapperId = "chart-using-svg";
+    histogram.setGroup(rowVals, colors);
+    // 绘制折线图
     wrapper = document.querySelector("#chart-using-canvas");
     if (wrapper.firstChild) {
         wrapper.removeChild(wrapper.firstChild);
