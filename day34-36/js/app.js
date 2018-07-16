@@ -92,23 +92,19 @@ document.querySelector("#table-wrapper").onmouseover = function (event) {
             wrapper.removeChild(wrapper.firstChild);
         }
         lineChart.wrapperId = "chart-using-canvas";
-        lineChart.set(a);
+        lineChart.setSingle(a);
     }
 }
 
+// 为table添加事件，实时绘制直方图和折线图
 document.querySelector("#table-wrapper").onmouseout = function (event) {
-    // if (event.target.nodeName.toLowerCase() !== "td"
-        // && event.target.nodeName.toLowerCase() !== "tr"
-        // && event.target.nodeName.toLowerCase() !== "th") {
-        // console.log("hello, world");
-    // }
-    var rowVals,
-        rowMaxVals;
+    var rowVals;
 
     rowVals = [];
-    rowMaxVals = [];
+    colors = ["#d93a49", "#f47920", "#ffd400", "#45b97c", "#009ad6", "#145b7d", "#6f60aa", "#80752c", "#87843b"];
     if (event.target.nodeName.toLowerCase() === "table") {
         var tb,
+            wrapper,
             i;
 
         tb = event.target;
@@ -122,7 +118,12 @@ document.querySelector("#table-wrapper").onmouseout = function (event) {
                 return !isNaN(item);
             });
             rowVals.push(cells);
-            rowMaxVals.push(Math.max.apply(null, cells));
         }
+        wrapper = document.querySelector("#chart-using-canvas");
+        if (wrapper.firstChild) {
+            wrapper.removeChild(wrapper.firstChild);
+        }
+        lineChart.wrapperId = "chart-using-canvas";
+        lineChart.setGroup(rowVals, colors);
     }
 }

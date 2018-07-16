@@ -89,76 +89,50 @@ lineChart = {
     pointColor: "transparent",
     lineColor: "#37A2DA",
     strokeWidth: "2",
-    chart: document.createElement("canvas"),
+    chart: null,
     x0: 0,
     y0: 0,
+    xAxis: 0,
+    yAxis: 0,
+    pointSpace: 0,
+    pxDataRatio: 0,
     init: function () {
-        var xAxis,
-            yAxis,
-            context;
+        var context;
 
         this.x0 = 10;
         this.y0 = this.height - 10;
+        this.xAxis = this.width - this.initAxisSpace;
+        this.yAxis = this.height - this.initAxisSpace;
+        this.chart = document.createElement("canvas");
         this.chart.setAttribute("width", this.width);
         this.chart.setAttribute("height", this.height);
         this.chart.innerHTML = "A drawing of a line chart.";
-        xAxis = this.width - this.initAxisSpace;
-        yAxis = this.height - this.initAxisSpace;
         context = this.chart.getContext("2d");
         context.strokeStyle = this.axisColor;
         context.beginPath();
-        context.moveTo(x0, y0);
-        context.lineTo(x0, y0-yAxis);
-        context.moveTo(x0, y0);
-        context.lineTo(x0+xAxis, y0);
-        context.stroke();
-    }
-
-
-    init: function () {
-        var xAxis,
-            yAxis,
-            pointSpace,
-            pxDataRatio;
-
-        xAxis = this.width - this.initAxisSpace;
-        yAxis = this.height - this.initAxisSpace;
-        pointSpace = parseInt(xAxis/this.data.length);
-        pxDataRatio = yAxis / Math.max.apply(null, this.data);
-
-        var lineChart;
-        lineChart = document.createElement("canvas");
-        lineChart.setAttribute("width", this.width);
-        lineChart.setAttribute("height", this.height);
-        lineChart.innerHTML = "A drawing of a line chart.";
-
-        var context,
-        x0,
-        y0;
-
-        x0 = 10;
-        y0 = this.height - 10;
-        context = lineChart.getContext("2d");
-        context.strokeStyle = this.axisColor;
-        context.beginPath();
-        context.moveTo(x0, y0);
-        context.lineTo(x0, y0-yAxis);
-        context.moveTo(x0, y0);
-        context.lineTo(x0+xAxis, y0);
+        context.moveTo(this.x0, this.y0);
+        context.lineTo(this.x0, this.y0-this.yAxis);
+        context.moveTo(this.x0, this.y0);
+        context.lineTo(this.x0+this.xAxis, this.y0);
         context.stroke();
     },
     drawSingle: function () {
-
         var i,
             x,
             y,
             tx,
-            ty;
+            ty,
+            context,
+            pointSpace,
+            pxDataRatio;
 
+        pointSpace = this.pointSpace || parseInt(this.xAxis/this.data.length);
+        pxDataRatio = this.pxDataRatio || this.yAxis / Math.max.apply(null, this.data);
+        context = this.chart.getContext("2d");
         context.fillStyle = this.pointColor;
         context.strokeStyle = this.lineColor;
-        for (x = x0, i = 0; i < this.data.length; i++, x += pointSpace) {
-            y = y0 - this.data[i] * pxDataRatio;
+        for (x = this.x0, i = 0; i < this.data.length; i++, x += pointSpace) {
+            y = this.y0 - this.data[i] * pxDataRatio;
             context.beginPath();
             context.arc(x, y, this.pointRadius, 0, 2*Math.PI, false);
             context.stroke();
@@ -171,21 +145,37 @@ lineChart = {
             tx = x;
             ty = y;
         }
-        return lineChart;
     },
-    // drawGroup: function ()
     setSingle: function (data) {
+        this.init();
         this.data = data;
-        document.querySelector("#"+this.wrapperId).appendChild(this.drawSingle());
-    }
+        this.drawSingle();
+        document.querySelector("#"+this.wrapperId).appendChild(this.chart);
+    },
     setGroup: function (arrayOfData, arrayOfColor) {
-        var i;
+        var maxVal,
+            prevColor,
+            prevRatio,
+            prevSpace,
+            i;
 
+        maxVal = arrayOfData.map(function (item, index, array) {
+            return Math.max.apply(null, item);
+        });
+        this.init();
+        prevColor = this.lineColor;
+        prevSpace = this.pointSpace;
+        prevRatio = this.pxDataRatio;
+        this.pointSpace = parseInt(this.xAxis/arrayOfData[0].length);
+        this.pxDataRatio = this.yAxis / Math.max.apply(null, maxVal);
         for (i = 0; i < arrayOfData.length; i++) {
             this.data = arrayOfData[i];
             this.lineColor = arrayOfColor[i];
             this.drawSingle();
         }
-
+        this.lineColor = prevColor;
+        this.pointSpace = prevSpace;
+        this.pxDataRatio = prevRatio;
+        document.querySelector("#"+this.wrapperId).appendChild(this.chart);
     }
 }
