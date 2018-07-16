@@ -96,34 +96,31 @@ document.querySelector("#table-wrapper").onmouseover = function (event) {
     }
 }
 
-// 为table添加事件，实时绘制直方图和折线图
+// 为table添加事件，绘制所有折线图
 document.querySelector("#table-wrapper").onmouseout = function (event) {
-    var rowVals;
+    var rowVals,
+        tb,
+        wrapper,
+        i;
 
     rowVals = [];
     colors = ["#d93a49", "#f47920", "#ffd400", "#45b97c", "#009ad6", "#145b7d", "#6f60aa", "#80752c", "#87843b"];
-    if (event.target.nodeName.toLowerCase() === "table") {
-        var tb,
-            wrapper,
-            i;
+    tb = document.querySelector("table");
+    for (i = 1; i < tb.rows.length; i++) {
+        var cells;
 
-        tb = event.target;
-        for (i = 1; i < tb.rows.length; i++) {
-            var cells;
-
-            cells = Array.prototype.map.call(tb.rows[i].cells, function (item, index, array) {
-                return +item.innerHTML;
-            });
-            cells = cells.filter(function (item, index, array) {
-                return !isNaN(item);
-            });
-            rowVals.push(cells);
-        }
-        wrapper = document.querySelector("#chart-using-canvas");
-        if (wrapper.firstChild) {
-            wrapper.removeChild(wrapper.firstChild);
-        }
-        lineChart.wrapperId = "chart-using-canvas";
-        lineChart.setGroup(rowVals, colors);
+        cells = Array.prototype.map.call(tb.rows[i].cells, function (item, index, array) {
+            return +item.innerHTML;
+        });
+        cells = cells.filter(function (item, index, array) {
+            return !isNaN(item);
+        });
+        rowVals.push(cells);
     }
+    wrapper = document.querySelector("#chart-using-canvas");
+    if (wrapper.firstChild) {
+        wrapper.removeChild(wrapper.firstChild);
+    }
+    lineChart.wrapperId = "chart-using-canvas";
+    lineChart.setGroup(rowVals, colors);
 }

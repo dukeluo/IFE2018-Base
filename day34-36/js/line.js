@@ -86,7 +86,6 @@ lineChart = {
     initAxisSpace: 20,
     axisColor: "#000",
     pointRadius: "3",
-    pointColor: "transparent",
     lineColor: "#37A2DA",
     strokeWidth: "2",
     chart: null,
@@ -129,19 +128,19 @@ lineChart = {
         pointSpace = this.pointSpace || parseInt(this.xAxis/this.data.length);
         pxDataRatio = this.pxDataRatio || this.yAxis / Math.max.apply(null, this.data);
         context = this.chart.getContext("2d");
-        context.fillStyle = this.pointColor;
+        context.fillStyle = this.lineColor;
         context.strokeStyle = this.lineColor;
+        context.lineWidth = this.strokeWidth;
         for (x = this.x0, i = 0; i < this.data.length; i++, x += pointSpace) {
             y = this.y0 - this.data[i] * pxDataRatio;
             context.beginPath();
             context.arc(x, y, this.pointRadius, 0, 2*Math.PI, false);
-            context.stroke();
             if (i) {
-                context.beginPath();
                 context.moveTo(tx, ty);
                 context.lineTo(x, y);
-                context.stroke();
             }
+            context.stroke();
+            context.fill();
             tx = x;
             ty = y;
         }
