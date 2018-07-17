@@ -1,0 +1,25 @@
+#radio-wrapper {
+  overflow: auto;
+}
+
+#region-radio-wrapper {
+  float: left;
+}
+
+#product-radio-wrapper {
+  float: left;
+}
+
+#chart-wrapper {
+  overflow: auto;
+}
+
+#chart-using-svg {
+  width: 50%;
+  float: left;
+}
+
+#chart-using-canvas {
+  width: 50%;
+  float: left;
+}
