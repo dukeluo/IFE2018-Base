@@ -23,3 +23,26 @@
   width: 50%;
   float: left;
 }
+
+#table-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#table-wrapper table {
+  width: 1400px;
+}
+
+#table-wrapper table td.sale:hover {
+  background-image: url(../image/edit.png);
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+}
+
+.editable-cell {
+  width: 30px;
+  padding: 0;
+  border: none;
+  /* text-align: center; */
+  /* font-size: 18px; */
+}

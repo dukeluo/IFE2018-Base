@@ -35,7 +35,7 @@ createCheckBox("region-radio-wrapper", [{
 }]);
 
 // 为checkbox添加事件
-document.querySelector("#radio-wrapper").onclick = function(event) {
+function drawTableAccordingToCheckbox(event) {
     if (event.target.nodeName.toLowerCase() === "input") {
         var selectedRegionNum,
             selectedProductNum,
@@ -55,14 +55,10 @@ document.querySelector("#radio-wrapper").onclick = function(event) {
     }
 }
 
-// 使用SVG绘制华东地区手机12个月数据直方图
-// document.querySelector("#chart-using-svg").appendChild(drawHistogram(sourceData[0].sale));
-
-// 使用canvas绘制华东地区手机12个月数据折线图
-// document.querySelector("#chart-using-canvas").appendChild(drawLinechart(sourceData[0].sale));
+document.querySelector("#radio-wrapper").addEventListener("click", drawTableAccordingToCheckbox, false);
 
 // 为table添加事件，实时绘制直方图和折线图
-document.querySelector("#table-wrapper").onmouseover = function (event) {
+function drawChartWhenHover(event) {
     if (event.target.nodeName.toLowerCase() === "td") {
         var cells,
             a,
@@ -96,8 +92,10 @@ document.querySelector("#table-wrapper").onmouseover = function (event) {
     }
 }
 
+document.querySelector("#table-wrapper").addEventListener("mouseover", drawChartWhenHover, false);
+
 // 为table添加事件，绘制所有折线图和折线图
-document.querySelector("#table-wrapper").onmouseout = function (event) {
+function drawAllCharts(event) {
     var rowVals,
         tb,
         wrapper,
@@ -132,3 +130,20 @@ document.querySelector("#table-wrapper").onmouseout = function (event) {
     lineChart.wrapperId = "chart-using-canvas";
     lineChart.setGroup(rowVals, colors);
 }
+
+document.querySelector("#table-wrapper").addEventListener("mouseout", drawAllCharts, false);
+
+// table
+function editTdOfTable(event) {
+    if (event.target.nodeName.toLowerCase() === "td") {
+          var td;
+
+          td = event.target;
+          // console.log(td.getAttribute("class"));
+          if (!td.classList.contains("editable")) {
+              tdToInput(td);
+          }
+    }
+}
+
+document.querySelector("#table-wrapper").addEventListener("click", editTdOfTable, false);

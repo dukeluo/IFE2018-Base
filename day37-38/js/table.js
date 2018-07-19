@@ -17,7 +17,7 @@ function createTable(data) {
         return t;
     });
     tableHTML = '';
-    tableHTML += '<table border="1" cellspacing="0" bordercolor="#000" width = "80%" style="border-collapse:collapse;text-align:center;">';
+    tableHTML += '<table border="1" cellpadding="0" cellspacing="0" bordercolor="#000" width = "80%" style="border-collapse:collapse;text-align:center;">';
     tableHTML += '<tr><th>商品</th><th>地区</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th>';
     tableHTML += '<th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th></tr>';
     for (i = 0; i < data.length; i++) {
@@ -25,7 +25,11 @@ function createTable(data) {
         vals = [];
         vals = flatten2d(Object.values(data[i]));
         for (j = 0; j < vals.length; j++) {
-            row += '<td>' + vals[j] + '</td>';
+            if (j >= 2) {
+                row += '<td class="sale">' + vals[j] + '</td>';
+            } else {
+                row += '<td>' + vals[j] + '</td>';
+            }
         }
         row += '</tr>';
         tableHTML += row;
@@ -69,4 +73,30 @@ function exchCellValueOfOneRow(tb, row, col1, col2) {
     t = tb.rows[row].cells[col1].innerHTML;
     tb.rows[row].cells[col1].innerHTML = tb.rows[row].cells[col2].innerHTML;
     tb.rows[row].cells[col2].innerHTML = t;
+}
+
+//
+function tdToInput(td) {
+    var input;
+
+    input = document.createElement("input");
+    input.type = "text";
+    input.setAttribute("class", "editable-cell");
+    input.value = td.innerHTML;
+    input.addEventListener("blur", isInputValueNumber, false);
+    td.innerHTML = "";
+    td.appendChild(input);
+    td.classList.add("editable");
+    input.focus();
+}
+
+//
+function isInputValueNumber(event) {
+    if (isNaN(event.target.value)) {
+        alert("Input is not a number!!!");
+        // console.log(event.target);
+        // event.target.select()
+        // event target get focus again
+        // May be fix;
+    }
 }
