@@ -140,8 +140,11 @@ function editTdOfTable(event) {
 
           td = event.target;
           // console.log(td.getAttribute("class"));
-          if (!td.classList.contains("editable")) {
-              tdToInput(td);
+          if (td.getAttribute("class") === "sale") {
+          // if (!td.classList.contains("editable")) {
+          // if (!td.getAttribute("id")) {
+              // console.log(td);
+              tdToInputStatus(td);
           }
     }
 }

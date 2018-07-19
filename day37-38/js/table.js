@@ -76,17 +76,34 @@ function exchCellValueOfOneRow(tb, row, col1, col2) {
 }
 
 //
-function tdToInput(td) {
-    var input;
+function tdToInputStatus(td) {
+    var div;
+    div = document.createElement("div");
+    div.setAttribute("class", "edit-group");
 
+    var input;
     input = document.createElement("input");
     input.type = "text";
-    input.setAttribute("class", "editable-cell");
+    input.setAttribute("class", "edit-input");
     input.value = td.innerHTML;
     input.addEventListener("blur", isInputValueNumber, false);
+
+    var checkedBtn;
+    checkedBtn = document.createElement("button");
+    checkedBtn.setAttribute("class", "checked-item");
+
+    var deleteBtn;
+    deleteBtn = document.createElement("button");
+    deleteBtn.setAttribute("class", "delete-item");
+
+    div.appendChild(input);
+    div.appendChild(checkedBtn);
+    div.appendChild(deleteBtn);
     td.innerHTML = "";
-    td.appendChild(input);
-    td.classList.add("editable");
+    td.appendChild(div);
+    // td.classList.add("editable");
+    td.setAttribute("class", "editable");
+    // td.setAttribute("id", "editable");
     input.focus();
 }
 

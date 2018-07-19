@@ -30,19 +30,57 @@
 }
 
 #table-wrapper table {
-  width: 1400px;
+  /* width: 1400px; */
 }
 
 #table-wrapper table td.sale:hover {
+  /* background-color: #ccc; */
   background-image: url(../image/edit.png);
   background-position: 90% 50%;
   background-repeat: no-repeat;
 }
 
-.editable-cell {
+.edit-group {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 30px;
+}
+
+.edit-input {
+  display: inline-block;
+  position: absolute;
+  top: 25%;
+  left: 0;
   width: 30px;
   padding: 0;
   border: none;
-  /* text-align: center; */
-  /* font-size: 18px; */
+}
+
+.checked-item {
+  display: inline-block;
+  position: absolute;
+  top: 25%;
+  left: 40px;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background-image: url(../image/checked.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.delete-item {
+  display: inline-block;
+  position: absolute;
+  top: 25%;
+  left: 60px;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background-image: url(../image/delete.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
