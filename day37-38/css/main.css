@@ -29,11 +29,16 @@
   justify-content: center;
 }
 
-#table-wrapper table {
+table {
   width: 1400px;
 }
 
-#table-wrapper table td.sale:hover {
+table td {
+  width: 100px;
+  height: 30px;
+}
+
+table td.sale:hover {
   background-image: url(../image/edit.png);
   background-position: 90% 50%;
   background-repeat: no-repeat;
@@ -43,7 +48,7 @@
   display: inline-block;
   position: relative;
   width: 80px;
-  height: 30px;
+  height: 20px;
 }
 
 .edit-input {
@@ -64,6 +69,7 @@
   width: 18px;
   height: 18px;
   border: none;
+  background-color: transparent;
   background-image: url(../image/checked.png);
   background-position: center;
   background-repeat: no-repeat;
@@ -78,6 +84,7 @@
   width: 18px;
   height: 18px;
   border: none;
+  background-color: transparent;
   background-image: url(../image/delete.png);
   background-position: center;
   background-repeat: no-repeat;

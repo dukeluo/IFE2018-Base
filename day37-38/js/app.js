@@ -139,9 +139,12 @@ document.querySelector("#table-wrapper").addEventListener("mouseout", drawAllCha
 // 为table添加事件，点击单元格可对单元格编辑
 function editTdOfTable(event) {
     if (event.target.nodeName.toLowerCase() === "td") {
-          var td;
+          var td = event.target,
+              editableCell = document.querySelector("div.edit-group");
 
-          td = event.target;
+          if (editableCell) {
+              editableStatusExit(editableCell, editableCell.firstChild.value);
+          }
           if (td.getAttribute("class") === "sale") {
               tdToEditableStatus(td);
           }
@@ -152,14 +155,14 @@ document.querySelector("#table-wrapper").addEventListener("click", editTdOfTable
 
 // 为document添加事件，关闭多余的可编辑单元格
 function cancelImproperEditableCell(event) {
-    var editableCells = document.querySelectorAll("div.edit-group"),
-        i;
+    // 避免事件冲突，这是一个大坑，此处不是一个好的解决方法
+    if ((event.target.nodeName.toLowerCase() !== "td")
+        && (event.target.nodeName.toLowerCase() !== "button")) {
+        var editableCell = document.querySelector("div.edit-group");
 
-    if (editableCells.length > 1) {
-        for (i = 1; i < editableCells.length; i++) {
-            editableStatusExit(editableCells[i], editableCells[i].firstChild.value);
+        if (editableCell) {
+            editableStatusExit(editableCell, editableCell.firstChild.value);
         }
-        editableCells[0].firstChild.focus();
     }
 }
 
