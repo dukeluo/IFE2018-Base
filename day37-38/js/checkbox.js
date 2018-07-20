@@ -69,7 +69,7 @@ function getData() {
         i,
         j;
 
-    data = sourceData;
+    data = getLocalStorage() || sourceData;
     for (i = 0; i < CHECKBOXSET_IDS.length; i++) {
         checkboxValue = getCheckboxValue(CHECKBOXSET_IDS[i]);
         if (CHECKBOXSET_IDS[i] === "region-radio-wrapper") {

@@ -30,11 +30,10 @@
 }
 
 #table-wrapper table {
-  /* width: 1400px; */
+  width: 1400px;
 }
 
 #table-wrapper table td.sale:hover {
-  /* background-color: #ccc; */
   background-image: url(../image/edit.png);
   background-position: 90% 50%;
   background-repeat: no-repeat;

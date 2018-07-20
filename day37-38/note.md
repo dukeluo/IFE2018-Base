@@ -8,3 +8,7 @@
 2.兼容性差异
 
 兼容性差异只针对浏览器IE6、IE7与标签button、input而言，在win、win7、vista的XP主题下均会出现此情况。
+
+parentElement is new to Firefox 9 and to DOM4, but it has been present in all other major browsers for ages.
+
+In most cases, it is the same as parentNode. The only difference comes when a node's parentNode is not an element. If so, parentElement is null.

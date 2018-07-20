@@ -1,3 +1,6 @@
+// 初始化localStorage
+initLocalStorage();
+
 // 创建系列checkbox
 createCheckBox("product-radio-wrapper", [{
     id: "手机",
@@ -133,20 +136,31 @@ function drawAllCharts(event) {
 
 document.querySelector("#table-wrapper").addEventListener("mouseout", drawAllCharts, false);
 
-// table
+// 为table添加事件，点击单元格可对单元格编辑
 function editTdOfTable(event) {
     if (event.target.nodeName.toLowerCase() === "td") {
           var td;
 
           td = event.target;
-          // console.log(td.getAttribute("class"));
           if (td.getAttribute("class") === "sale") {
-          // if (!td.classList.contains("editable")) {
-          // if (!td.getAttribute("id")) {
-              // console.log(td);
-              tdToInputStatus(td);
+              tdToEditableStatus(td);
           }
     }
 }
 
 document.querySelector("#table-wrapper").addEventListener("click", editTdOfTable, false);
+
+// 为document添加事件，关闭多余的可编辑单元格
+function cancelImproperEditableCell(event) {
+    var editableCells = document.querySelectorAll("div.edit-group"),
+        i;
+
+    if (editableCells.length > 1) {
+        for (i = 1; i < editableCells.length; i++) {
+            editableStatusExit(editableCells[i], editableCells[i].firstChild.value);
+        }
+        editableCells[0].firstChild.focus();
+    }
+}
+
+document.querySelector("body").addEventListener("click", cancelImproperEditableCell, false);

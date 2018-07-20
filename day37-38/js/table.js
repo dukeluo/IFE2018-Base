@@ -26,7 +26,8 @@ function createTable(data) {
         vals = flatten2d(Object.values(data[i]));
         for (j = 0; j < vals.length; j++) {
             if (j >= 2) {
-                row += '<td class="sale">' + vals[j] + '</td>';
+                row += '<td class="sale" data-product=' + vals[0]
+                        + ' data-region=' + vals[1] + '>' + vals[j] + '</td>';
             } else {
                 row += '<td>' + vals[j] + '</td>';
             }
@@ -73,47 +74,4 @@ function exchCellValueOfOneRow(tb, row, col1, col2) {
     t = tb.rows[row].cells[col1].innerHTML;
     tb.rows[row].cells[col1].innerHTML = tb.rows[row].cells[col2].innerHTML;
     tb.rows[row].cells[col2].innerHTML = t;
-}
-
-//
-function tdToInputStatus(td) {
-    var div;
-    div = document.createElement("div");
-    div.setAttribute("class", "edit-group");
-
-    var input;
-    input = document.createElement("input");
-    input.type = "text";
-    input.setAttribute("class", "edit-input");
-    input.value = td.innerHTML;
-    input.addEventListener("blur", isInputValueNumber, false);
-
-    var checkedBtn;
-    checkedBtn = document.createElement("button");
-    checkedBtn.setAttribute("class", "checked-item");
-
-    var deleteBtn;
-    deleteBtn = document.createElement("button");
-    deleteBtn.setAttribute("class", "delete-item");
-
-    div.appendChild(input);
-    div.appendChild(checkedBtn);
-    div.appendChild(deleteBtn);
-    td.innerHTML = "";
-    td.appendChild(div);
-    // td.classList.add("editable");
-    td.setAttribute("class", "editable");
-    // td.setAttribute("id", "editable");
-    input.focus();
-}
-
-//
-function isInputValueNumber(event) {
-    if (isNaN(event.target.value)) {
-        alert("Input is not a number!!!");
-        // console.log(event.target);
-        // event.target.select()
-        // event target get focus again
-        // May be fix;
-    }
 }
