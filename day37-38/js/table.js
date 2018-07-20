@@ -27,7 +27,8 @@ function createTable(data) {
         for (j = 0; j < vals.length; j++) {
             if (j >= 2) {
                 row += '<td class="sale" data-product=' + vals[0]
-                        + ' data-region=' + vals[1] + '>' + vals[j] + '</td>';
+                        + ' data-region=' + vals[1] + ' data-month=' + (j-1)
+                        + '>' + vals[j] + '</td>';
             } else {
                 row += '<td>' + vals[j] + '</td>';
             }

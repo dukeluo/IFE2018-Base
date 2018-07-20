@@ -57,13 +57,14 @@ function editingStatusTrigger(event, initVal) {
         var val = input.value,
             td = eTarget.parentNode.parentNode,
             product = td.getAttribute("data-product"),
-            region = td.getAttribute("data-region");
+            region = td.getAttribute("data-region"),
+            month = td.getAttribute("data-month");
 
         if (isNaN(val)) {
             alert("Input is not a number!!!");
             input.focus();
         } else {
-            updateLocalStorage(product, region,td.cellIndex-2, +val);
+            updateLocalStorage(product, region, month-1, +val);
             editableStatusExit(eTarget.parentNode, val);
         }
     }
