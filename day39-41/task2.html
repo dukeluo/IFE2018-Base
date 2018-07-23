@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>IFE day39-41</title>
+</head>
+<body>
+  <button id="a">A</button>
+  <button id="b">B</button>
+  <button id="c">C</button>
+  <button id="d">D</button>
+  <button id="e">E</button>
+  <button id="f">F</button>
+  <div id="contABC"></div>
+  <div id="contDEF"></div>
+
+  <script type="text/javascript">
+      document.getElementsByTagName("body")[0].addEventListener("click", function (event) {
+          var contABCHash = "contABC=",
+              contDEFHash = "contDEF=",
+              hash = location.hash || "contABC=&contDEF=";
+
+          if (event.target.getAttribute("id") === "a"
+              || event.target.getAttribute("id") === "b"
+              || event.target.getAttribute("id") === "c") {
+              contABCHash += event.target.innerHTML;
+          }
+          if (event.target.getAttribute("id") === "d"
+              || event.target.getAttribute("id") === "e"
+              || event.target.getAttribute("id") === "f") {
+              contDEFHash += event.target.innerHTML;
+          }
+          hash = hash.split("&");
+          if (contABCHash.length !== 8) {
+              hash[0] = contABCHash
+          }
+          if (contDEFHash.length !== 8) {
+              hash[1] = contDEFHash
+          }
+          hash = hash.join("&");
+          location.hash = hash;
+      }, false);
+      window.addEventListener("hashchange", renderCont, false);
+      renderCont();
+
+      function getStateFromHash() {
+          var s = location.hash,
+              res = {},
+              p,
+              i;
+
+          if (!s) {
+              return null;
+          }
+          s = s.substring(1);
+          s = s.split("&");
+          for (i = 0; i < s.length; i++) {
+              p = s[i].split("=");
+              if (p[1]) {
+                  res[p[0]] = p[1];
+              }
+          }
+          return res;
+      }
+
+      function renderCont() {
+          var contABC = document.getElementById("contABC"),
+              contDEF = document.getElementById("contDEF"),
+              o = getStateFromHash();
+
+          if (!o) {
+              return ;
+          }
+          if (o.contABC) {
+              contABC.innerHTML = o.contABC;
+          }
+          if (o.contDEF) {
+              contDEF.innerHTML = o.contDEF;
+          }
+      }
+  </script>
+</body>
+</html>
