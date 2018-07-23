@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>IFE day39-41</title>
+</head>
+<body>
+  <button id="a">A</button>
+  <button id="b">B</button>
+  <button id="c">C</button>
+  <div id="cont"></div>
+
+  <script type="text/javascript">
+      document.getElementsByTagName("body")[0].addEventListener("click", function (event) {
+          if (event.target.nodeName.toLowerCase() === "button") {
+              location.hash = event.target.innerHTML;
+          }
+      }, false);
+      window.addEventListener("hashchange", renderCont, false);
+      renderCont();
+
+      function getStateFromHash() {
+          var s = location.hash;
+
+          return s ? s.substring(1) : null;
+      }
+
+      function renderCont() {
+          var cont = document.getElementById("cont"),
+              val = getStateFromHash();
+
+          if (val) {
+              cont.innerHTML = val;
+          }
+      }
+  </script>
+</body>
+</html>
