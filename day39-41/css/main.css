@@ -1,0 +1,92 @@
+#radio-wrapper {
+  overflow: auto;
+}
+
+#region-radio-wrapper {
+  float: left;
+}
+
+#product-radio-wrapper {
+  float: left;
+}
+
+#chart-wrapper {
+  overflow: auto;
+}
+
+#chart-using-svg {
+  width: 50%;
+  float: left;
+}
+
+#chart-using-canvas {
+  width: 50%;
+  float: left;
+}
+
+#table-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  width: 1400px;
+}
+
+table td {
+  width: 100px;
+  height: 30px;
+}
+
+table td.sale:hover {
+  background-image: url(../image/edit.png);
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+}
+
+.edit-group {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 20px;
+}
+
+.edit-input {
+  display: inline-block;
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 30px;
+  padding: 0;
+  border: none;
+}
+
+.checked-item {
+  display: inline-block;
+  position: absolute;
+  top: 25%;
+  left: 40px;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background-color: transparent;
+  background-image: url(../image/checked.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.delete-item {
+  display: inline-block;
+  position: absolute;
+  top: 25%;
+  left: 60px;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background-color: transparent;
+  background-image: url(../image/delete.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
