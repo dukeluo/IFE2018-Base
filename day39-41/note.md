@@ -6,6 +6,6 @@
 ### change事件
 change事件在`<input>`, `<select>`, 和`<textarea>`元素的值更改时触发；与input事件不同，change事件不一定会对元素值的每次更改触发。
 触发情景：  
- - `<input type="radio">`和`<input type="checkbox">`的默认选项被修改时（通过点击或者键盘事件）;
- - 当用户完成提交动作时 (例如：点击了`<select>`中的一个选项，从`<input type="date">`标签选择了一个日期，通过`<input type="file">`标签上传了一个文件，等 );
- - 当标签的值被修改并且失焦后，但并未进行提交 (例如：对`<textarea>`或者`<input type="text">`的值进行编辑后。
+ - `<input type="radio">`和`<input type="checkbox">`的默认选项被修改时，例如：通过点击或者键盘事件；
+ - 当用户完成提交动作时，例如：点击了`<select>`中的一个选项，从`<input type="date">`标签选择了一个日期，通过`<input type="file">`标签上传了一个文件等；
+ - 当标签的值被修改并且失焦后，但并未进行提交，例如：对`<textarea>`或者`<input type="text">`的值进行编辑后。
