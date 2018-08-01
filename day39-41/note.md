@@ -11,7 +11,7 @@ change事件在`<input>`, `<select>`, 和`<textarea>`元素的值更改时触发
  - 当标签的值被修改并且失焦后，但并未进行提交，例如：对`<textarea>`或者`<input type="text">`的值进行编辑后。
 
 ### History对象
-[History 对象](https://javascript.ruanyifeng.com/bom/2.html)   
+[History 对象](https://wangdoc.com/javascript/bom/history.html)   
 **`history.pushState()`会增加历史记录的条目，但是不会触发`hashchange`和`popstate`；`hashchange`也可以增加历史记录的条目，但是它却可以触发`popstate`。**    
 
 ### Ajax
