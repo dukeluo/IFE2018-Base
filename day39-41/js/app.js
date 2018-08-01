@@ -79,6 +79,7 @@ function setLoactionHashAccordingToCheckbox() {
         hash[1] = productHash;
     }
     location.hash = hash.join("&");
+    // history.pushState(null, "", "#"+hash.join("&"));     //利用pushState，题目要求应该不是这样简单，捂脸...
 }
 
 document.querySelector("#radio-wrapper").addEventListener("change", setLoactionHashAccordingToCheckbox, false);

@@ -12,4 +12,7 @@ change事件在`<input>`, `<select>`, 和`<textarea>`元素的值更改时触发
 
 ### History对象
 [History 对象](https://javascript.ruanyifeng.com/bom/2.html)   
-`history.pushState()`会增加历史记录的条目，但是不会触发`hashchange`和`popstate`；`hashchange`也可以增加历史记录的条目，但是它却可以触发`popstate`。
+**`history.pushState()`会增加历史记录的条目，但是不会触发`hashchange`和`popstate`；`hashchange`也可以增加历史记录的条目，但是它却可以触发`popstate`。**    
+
+### Ajax
+[JavaScript教程 Ajax](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499861493e7c35be5e0864769a2c06afb4754acc6000)
