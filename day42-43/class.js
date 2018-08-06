@@ -1,19 +1,19 @@
 /**
- * @param       {number} cash
- * @param       {number} seats
- * @param       {Array} staff
- * @param       {Array} bookedMeal
+ * @param       {number}  cash
+ * @param       {number}  seat
+ * @param       {Array}   staff
  * @constructor
  */
-function Restaurant(cash, seats, staff, bookedMeal) {
+function Restaurant(cash, seat, staff) {
     this.cash = cash;
-    this.seats = seats;
+    this.seat = seat;
     this.staff = staff;
-    this.bookedMeal = bookedMeal;
+    this.bookedMeal = [];
+    this.orderList = [];
 }
 
 /**
- * @param  {Staff} p
+ * @param  {Staff} s
  * @return {void}
  */
 Restaurant.prototype.recruitStaff = function (s) {
@@ -43,7 +43,8 @@ Restaurant.prototype.fireStaff = function (id) {
 Restaurant.prototype.beginOrder = function (o) {
     this.bookedMeal = this.bookedMeal.concat(o.mealList);
     this.cash -= o.cost;
-    this.seats -= o.seats;
+    this.seat -= o.seat;
+    this.orderList.push(o);
 }
 
 /**
@@ -52,7 +53,7 @@ Restaurant.prototype.beginOrder = function (o) {
  */
 Restaurant.prototype.finishOrder = function (o) {
     this.cash += o.price;
-    this.seats += o.seats;
+    this.seat += o.seat;
 }
 
 
@@ -69,54 +70,75 @@ function Staff(id, name, salary) {
 }
 
 
+/**
+ * @param       {number} id
+ * @param       {string} name
+ * @param       {number} salary
+ * @constructor
+ */
 function Waiter(id, name, salary) {
     Staff.call(this, id, name, salary);
 
 }
 
-// Waiter.prototype = new Staff();
 Waiter.prototype = Object.create(Staff.prototype);
 Waiter.prototype.constructor = Waiter;
-Waiter.prototype.finishWork = function (a) {
-    if (isArray(a)) {
-        return order(a);
-    } else {
-        return serve();
-    }
-}
+
+/**
+ *
+ * @param  {number}       customerId
+ * @param  {number}       seat
+ * @param  {Array}        mealList
+ * @param  {Restaurant}   r
+ * @return {void}
+ */
+Waiter.prototype.submitOrder = function (customerId, seat, mealList, r) {
+    var o = new Order(Date.now(), mealList, seat, mealList);
+
+    r.beginOrder(o);
+};
+// TODO:
+Waiter.prototype.serve = function (customerId) {
+};
 
 
+/**
+ * @param       {number} id
+ * @param       {string} name
+ * @param       {number} salary
+ * @constructor
+ */
 function Chef(id, name, salary) {
     Staff.call(this, id, name, salary);
 
 }
 
-Chef.prototype = new Staff();
+Chef.prototype = Object.create(Staff.prototype);
 Chef.prototype.constructor = Chef;
-Chef.prototype.finishWork = function (a) {
-    return cook(a);
-}
+// TODO:
+Chef.prototype.cook = function (m) {
+};
 
 
 /**
- * @param       {number} id
- * @param       {Array} m
+ * @param       {number}  id
+ * @param       {number}  seat
+ * @param       {Array}   mealList
  * @constructor
  */
-function Customer(id, m) {
+function Customer(id, seat, mealList) {
     this.id = id;
+    this.seat = seat;
     this.mealList = mealList;
 }
 
-Customer.prototype.order = function (r, m) {
-    if (!(r instanceof Restaurant)
-        || !(m instanceof Meal)) {
-          return ;
+Customer.prototype.order = function (w) {
+    if (!(w instanceof Waiter)) {
+        return ;
     }
-    this.mealList.push(m);
-    r.beginOrder(m);
+    return w.submitOrder(this.id, this.seat, this.mealList);
 };
-
+// TODO: 
 Customer.prototype.eat = function (r, m) {
 };
 
@@ -137,14 +159,14 @@ function Meal(name, cost, price) {
 /**
  * @param       {number} id
  * @param       {Array} mealList
- * @param       {number} seats
+ * @param       {number} seat
  * @param       {number} customerId
  * @constructor
  */
-function Order(id, mealList, seats, customerId) {
+function Order(id, mealList, seat, customerId) {
     this.id = id;
     this.mealList = mealList;
-    this.seats = seats;
+    this.seat = seat;
     this.customerId = customerId;
     this.cost = mealList.reduce(function (prev, curr, index, array) {
         return curr.cost + prev.cost;
@@ -153,3 +175,15 @@ function Order(id, mealList, seats, customerId) {
         return curr.price + prev.price;
     });
 }
+
+
+
+var ifeRestaurant = new Restaurant(1000000, 20, []);
+var newCook = new Chef(1, "Tony", 10000);
+console.log(newCook.constructor);
+
+console.log(ifeRestaurant.staff);
+ifeRestaurant.recruitStaff(newCook);
+console.log(ifeRestaurant.staff);
+ifeRestaurant.fireStaff(newCook.id);
+console.log(ifeRestaurant.staff);
