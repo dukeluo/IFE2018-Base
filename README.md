@@ -17,5 +17,4 @@
 | [Day34-36 我是精明的小卖家（二）](http://ife.baidu.com/course/detail/id/55)            | [代码](day34-36)           | [笔记](day34-36/note.md)  | [预览](https://dukeluo.me/IFE2018-Base/day34-36/index.html)    |
 | [Day37-38 我是精明的小卖家（三）](http://ife.baidu.com/course/detail/id/56)            | [代码](day37-38)           | [笔记](day37-38/note.md)  | [预览](https://dukeluo.me/IFE2018-Base/day37-38/index.html)    |
 | [Day39-41 我是精明的小卖家（四）](http://ife.baidu.com/course/detail/id/57)            | [代码](day39-41)           | [笔记](day39-41/note.md)  | [预览](https://dukeluo.me/IFE2018-Base/day39-41/index.html)    |
-
-**博客：[DukeLuo's Blog](https://dukeluo.me)**
+| [Day42-43 开一家餐厅吧（一）](http://ife.baidu.com/course/detail/id/58)               | [代码](day42-43)           | [笔记](day42-43/note.md)  | 预览                                                           |
