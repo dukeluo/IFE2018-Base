@@ -138,7 +138,7 @@ Customer.prototype.order = function (w) {
     }
     return w.submitOrder(this.id, this.seat, this.mealList);
 };
-// TODO: 
+// TODO:
 Customer.prototype.eat = function (r, m) {
 };
 
@@ -178,12 +178,12 @@ function Order(id, mealList, seat, customerId) {
 
 
 
-var ifeRestaurant = new Restaurant(1000000, 20, []);
-var newCook = new Chef(1, "Tony", 10000);
-console.log(newCook.constructor);
-
-console.log(ifeRestaurant.staff);
-ifeRestaurant.recruitStaff(newCook);
-console.log(ifeRestaurant.staff);
-ifeRestaurant.fireStaff(newCook.id);
-console.log(ifeRestaurant.staff);
+// var ifeRestaurant = new Restaurant(1000000, 20, []);
+// var newCook = new Chef(1, "Tony", 10000);
+// console.log(newCook.constructor);
+//
+// console.log(ifeRestaurant.staff);
+// ifeRestaurant.recruitStaff(newCook);
+// console.log(ifeRestaurant.staff);
+// ifeRestaurant.fireStaff(newCook.id);
+// console.log(ifeRestaurant.staff);
